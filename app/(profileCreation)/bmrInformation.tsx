@@ -28,7 +28,7 @@ export default function bmrInformation() {
           // else{
           //   alert("Please Fill Up the form correctly!")
           // }
-          router.replace("/")
+          router.replace("/(profileCreation)/healthInformation")
     
         }
         catch(err)
