@@ -18,6 +18,7 @@
       "typedRoutes": true,
       "tsconfigPaths": true
     },
+    
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {

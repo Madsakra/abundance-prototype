@@ -1,9 +1,10 @@
-import '../global.css';
+
 import { AuthProvider } from '~/context/auth';
 import { Slot, SplashScreen, Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
+import { Text, View } from 'react-native';
 
 
 
@@ -38,5 +39,7 @@ export default function RootLayout() {
       <Slot/>
     </GestureHandlerRootView>
     </AuthProvider>
+
+
   );
 }
