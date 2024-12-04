@@ -5,12 +5,18 @@ import { Platform, StyleSheet, Text, TouchableOpacity,View } from "react-native"
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 
-export default function DatePicker() {
+type DatePickerProps = {
+  birthDate:Date|null;
+  setBirthDate:(selectedDate:Date)=>void;
+}
+
+
+export default function DatePicker({birthDate,setBirthDate}:DatePickerProps) {
 
 
 
-    const [date, setDate] = useState<Date | null>(null); 
-    const [mode, setMode] = useState<'date' | 'time'>('date');
+   
+    const [mode, setMode] = useState<'date'>('date');
     const [show, setShow] = useState<boolean>(false);
   
 
@@ -26,12 +32,11 @@ export default function DatePicker() {
 
         if (currentDate)
         {
-            setDate(currentDate);
+            setBirthDate(currentDate);
         }
-        
-        
 
       };
+
 
   return (
 <View style={styles.container}>
@@ -39,7 +44,7 @@ export default function DatePicker() {
 <Text style={styles.label}>Birthdate</Text>
     <TouchableOpacity onPress={showPicker} style={styles.dateTimePickerTouch}>
     <AntDesign name="calendar" size={25} color="white" />
-    {date? <Text style={{color:'white'}}>{date.toLocaleDateString()}</Text>
+    {birthDate? <Text style={{color:'white'}}>{birthDate.toLocaleDateString()}</Text>
     : 
     <Text style={{fontFamily:'Poppins-Regular',fontSize:15,color:'white'}}>Choose your Birthdate</Text>
     }
@@ -48,7 +53,7 @@ export default function DatePicker() {
 
     {show && (
             <DateTimePicker
-            value={date || new Date()}
+            value={birthDate || new Date()}
             mode={mode}
             is24Hour={true}
             display="default"

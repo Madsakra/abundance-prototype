@@ -5,6 +5,8 @@ import { Link, router } from "expo-router";
 import { TextInput } from "react-native-gesture-handler";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import FunctionTiedButton from "~/components/FunctionTiedButton";
+
 
 export default function Home() {
 
@@ -57,9 +59,7 @@ export default function Home() {
 
   return (
     <View style={styles.pageContainer}>
-      <Link href="/landing" style={{padding:"4%"}}>
-      <FontAwesome name="chevron-left" size={24} color="#868686"/>      
-      </Link>
+
       
          {/* Form container*/}
       <View style={styles.formContainer}>
@@ -70,7 +70,7 @@ export default function Home() {
       </View>
      
       <Text  style={{fontFamily:'Poppins-SemiBold', fontSize:30, color:'#009797'}}>Hello Again!</Text>
-      <Text  style={{fontFamily:'Poppins-Regular', fontSize:14}}>Log in to your account</Text>
+      <Text  style={{fontFamily:'Poppins-Regular', fontSize:14, marginBottom:20}}>Log in to your account</Text>
 
 
 
@@ -105,11 +105,14 @@ export default function Home() {
             <Text style={{color:'#A3A2A2'}}>Forget Password?</Text>
         </Pressable>
 
-        <Pressable style={styles.buttonBox} onPress={loginCall}>
-            <Text  style={styles.buttonText}>Login</Text>
-        </Pressable>
+  
 
-
+      <FunctionTiedButton
+         buttonStyle={styles.buttonBox}
+         onPress={loginCall}
+         textStyle={styles.buttonText}
+         title="Login"
+      />
 
 
       </View>
@@ -160,7 +163,7 @@ const styles = StyleSheet.create({
   },
 
   inputBox: {
-     width: "70%",      
+     width: "80%",      
      height: "auto",
      padding: 15,
      borderColor: '#A3A2A2',
@@ -172,7 +175,7 @@ const styles = StyleSheet.create({
      flexDirection: 'row',
      alignItems: 'center',
      justifyContent: 'center',
-     width: "70%",       
+     width: "80%",       
      borderRadius: 5,
      paddingHorizontal: 10,
      borderWidth: 1,
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
 
   forgetPassword:{
       marginTop:10, 
-      width:'70%',
+      width:'80%',
       alignItems:"flex-end",   
   },
 
