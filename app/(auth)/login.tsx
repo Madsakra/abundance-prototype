@@ -30,7 +30,7 @@ export default function Home() {
     name:'axmen',
     email:'yhj@gmail.com',
     token:'hash1241241',
-    profileID:''
+    profileID:'24124'
   }
 
 
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
 
   buttonBox:{
    backgroundColor:"#00ACAC",
-   width:'70%',
+   width:'80%',
    borderRadius:5,
    marginTop:40
   },

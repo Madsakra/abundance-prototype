@@ -22,7 +22,7 @@ export default function landing() {
 
         
         <Link href="/login" asChild>
-        <Pressable style={{backgroundColor:'#00ACAC',width:'90%',borderRadius:5,alignSelf:'center'}}>
+        <Pressable style={{backgroundColor:'#00ACAC',width:'100%',borderRadius:5,alignSelf:'center'}}>
             <Text style={styles.buttonText}>Sign In</Text>
         </Pressable>
         </Link>

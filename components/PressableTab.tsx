@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { SvgProps } from 'react-native-svg';
+
+type PressableTabProps<T> = {
+  // GENERIC T MEANS IT WILL BE ABLE TO ACCEPT ANY DATA
+  tabBoxStyle: StyleProp<ViewStyle>;
+  tabTextStyle: StyleProp<TextStyle>;
+  tabValue: T;
+  editable: boolean;
+  handleInfo?: (diet: T) => void;
+  SvgIcon?: React.FC<SvgProps>; // Optional SVG icon
+};
 
 
-type PressableTabProps = {
-    tabBoxStyle:StyleProp<ViewStyle>;
-    innerCircleStyle?:StyleProp<ViewStyle>;
-    tabTextStyle:StyleProp<TextStyle>;
-    tabValue:string;
-
-  
-}
-
-
-export default function PressableTab({tabBoxStyle,innerCircleStyle,tabTextStyle,tabValue}:PressableTabProps) {
+export default function PressableTab<T>({
+  tabBoxStyle,
+  tabTextStyle,
+  tabValue,
+  editable,
+  handleInfo,
+  SvgIcon,
+}: PressableTabProps<T>) {
 
   const [pressed,setPressed] = useState(false);
 
@@ -20,17 +28,34 @@ export default function PressableTab({tabBoxStyle,innerCircleStyle,tabTextStyle,
   const unpressedStyle = [tabBoxStyle,{backgroundColor:'#949494'}]
 
   const handlePress = ()=>{
-    setPressed(true);
+    if (handleInfo)
+    {
+      setPressed((prev) => !prev);
+      handleInfo(tabValue);
+    }
   }
 
+  const displayText =
+  typeof tabValue === 'object' && tabValue !== null
+    ? (tabValue as any).name // Safely access object property
+    : String(tabValue); // Convert primitive to string
 
-
-  return (
-    <TouchableOpacity style={pressed?pressedStyle:unpressedStyle} onPress={handlePress}>
-        <View style={innerCircleStyle}></View>
-        <Text style={tabTextStyle}>{tabValue}</Text>
-    </TouchableOpacity>
-  )
+    return editable ? (
+      <TouchableOpacity
+        style={pressed ? pressedStyle : unpressedStyle}
+        onPress={handlePress}
+      >
+        {SvgIcon && <SvgIcon />}
+        <Text style={tabTextStyle}>
+          {displayText}
+        </Text>
+      </TouchableOpacity>
+    ) : (
+      <View style={pressedStyle}>
+        {SvgIcon && <SvgIcon />}
+        <Text style={tabTextStyle}>{displayText}</Text>
+      </View>
+    );
 }
 
 

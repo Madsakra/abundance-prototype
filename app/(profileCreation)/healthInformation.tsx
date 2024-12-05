@@ -1,17 +1,46 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import PressableTab from "~/components/PressableTab";
 import { FlashList } from "@shopify/flash-list";
-import { MasonryFlashList } from "@shopify/flash-list";
-
+import { useEffect, useState } from "react";
+import FunctionTiedButton from "~/components/FunctionTiedButton";
+import { toggleItemInList } from "~/util";
 
 export default function healthInformation() {
 
- const healthValues = ["Omnivore","Low Sugar","Low Fat",
+ const allDiets = ["Omnivore","Low Sugar","Low Fat",
     "Vegetarian","Ketosis","Pescatarian","Gluten-Free",
-    "Dairy-Free"]
+    "Dairy-Free","Nut-Free","Soy-Free","Halal","Kosher","Paleo"];
 
+
+
+ const healthConditions = ["Type 2 Diabets","High Blood Pressure",
+    "Type 1 Diabetes","High Cholesterol","Low Glucose Levels","Low Blood Pressure"];
+
+ const [profileDiet,setProfileDiet] = useState<string[]>([]);
+
+ const [profileHealthCondi,setProfileHealthCondi] = useState<string[]>([]);
+
+ const handleDiet = (diet: string) => {
+  toggleItemInList(diet,setProfileDiet)
+};
+
+
+const handleHealthCondi = (healthCondition: string) => {
+  toggleItemInList(healthCondition,setProfileHealthCondi)
+};
+
+
+
+
+
+  const nextSection = ()=>{
+    // SEND DATA TO SQL LITE FIRST
+
+    // NAVIGATE TO GOAL SETTING PAGE
+    router.replace("/(profileCreation)/goalSetting")
+  }
 
 
   return (
@@ -23,47 +52,52 @@ export default function healthInformation() {
 
         <Text style={styles.header}>Health Profile</Text>
 
+        {/*Dietary restriction section*/}
+        <View style={{height:"30%"}}>
+        <Text style={styles.listHeader}>Dietary Restrictions</Text>
+        <FlashList
+        data={allDiets}        
+        renderItem={({ item }) =>         
+        <PressableTab
+        editable={true} 
+        tabBoxStyle={styles.tabBox}
+        handleInfo={handleDiet}
+        tabTextStyle={styles.tabTextStyle}
+        tabValue={item}/>}
+        keyExtractor={(item) => item}
+        estimatedItemSize={100}
+        numColumns={2}
+        contentContainerStyle={styles.listContainer}
+        />
+        </View>
         
-        <Text style={{paddingLeft:25,fontFamily:'Poppins-SemiBold',fontSize:20,marginBottom:2}}>Dietary Restrictions</Text>
-        {<View style={
-            {height:"20%",padding:20,borderWidth:0.5,paddingVertical:5,marginBottom:35, 
-            width:"90%",alignSelf:"center",borderRadius:10}}>
 
+        {/* Health Conditions */}
+        <View style={{height:"20%",marginTop:50}}>
+        <Text style={styles.listHeader}>Health Conditions</Text>
         <FlashList
-        data={healthValues}        
+        data={healthConditions}        
         renderItem={({ item }) =>         
-        <PressableTab 
+        <PressableTab
+        editable={true} 
         tabBoxStyle={styles.tabBox}
+        handleInfo={handleHealthCondi}
         tabTextStyle={styles.tabTextStyle}
-        innerCircleStyle={styles.innerCircleStyle}
         tabValue={item}/>}
         keyExtractor={(item) => item}
         estimatedItemSize={100}
+        numColumns={2}
+        contentContainerStyle={styles.listContainer}
         />
+        </View>
 
-        </View>}
 
-   
-        <Text style={{paddingLeft:25,fontFamily:'Poppins-SemiBold',fontSize:20,marginBottom:2}}>Dietary Restrictions</Text>
-        {<View style={
-            {height:"25%",padding:20,borderWidth:0.5,paddingVertical:5,marginBottom:10, 
-            width:"90%",alignSelf:"center",borderRadius:10}}>
-
-        <FlashList
-        data={healthValues}        
-        renderItem={({ item }) =>         
-        <PressableTab 
-        tabBoxStyle={styles.tabBox}
-        tabTextStyle={styles.tabTextStyle}
-        innerCircleStyle={styles.innerCircleStyle}
-        tabValue={item}/>}
-        keyExtractor={(item) => item}
-        estimatedItemSize={100}
+        <FunctionTiedButton
+            buttonStyle={styles.buttonBox}
+            onPress={nextSection}
+            textStyle={styles.buttonText}
+            title="Next"
         />
-
-        </View>}
-
-
 
     </View>
   )
@@ -73,44 +107,65 @@ export default function healthInformation() {
 const styles = StyleSheet.create({
     header:{
         fontFamily:"Poppins-Bold",
-        fontSize:35, 
+        fontSize:40, 
         textAlign:"center",
         paddingVertical:10,
-        paddingTop:15
+
     },
 
 
     listContainer: {
-        flexGrow: 1,
-        flexDirection: 'row', 
-        flexWrap: 'wrap', 
+        padding:20,
+        
       },
 
     tabBox:{
-        width:"100%",
-        marginVertical:10,
-        flexDirection:"row",
-        borderRadius:5,
-        alignItems:"center",
-        padding:10,
-        gap:20,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 20,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        marginHorizontal: 4,
+        marginVertical:5,
+         flexGrow:1
     },
 
-    innerCircleStyle:{
-        width:30,
-        height:30,
-        borderRadius:50,
-        backgroundColor:"white"
-    },
+  
 
     tabTextStyle:{
         fontFamily:"Poppins-SemiBold",
-        fontSize:15, 
+        fontSize:14, 
         color:"white",
-        flexShrink:1
+     
     },
 
+    listHeader:{
+        paddingLeft:25,
+        fontFamily:'Poppins-SemiBold',
+        fontSize:20
+    },
 
+    listWarning:{
+    color:"red",
+    fontFamily:"Poppins-SemiBold",
+    paddingLeft:30,
+    fontSize:15
+    },
+
+    buttonBox:{
+        backgroundColor:"#8797DA",
+        borderRadius:5,
+        marginTop:"20%",
+        width:"90%",
+        alignSelf:"center"
+    },
+     
+    buttonText:{
+        fontFamily:"Poppins-Bold",
+        fontSize:20,color:"white",
+        padding:10,
+        textAlign:"center"
+    }
     
     
 })

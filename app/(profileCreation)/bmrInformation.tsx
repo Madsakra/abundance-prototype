@@ -72,17 +72,16 @@ export default function bmrInformation() {
 
         {/*Submit button*/}
 
-        {(height!==null) && (weight!==null)?
+      
         
         <FunctionTiedButton
             buttonStyle={styles.buttonBox}
             onPress={nextSection}
             textStyle={styles.buttonText}
             title="Next"
-        />:
-        <View></View>    
+        /> 
     
-    }
+    
 
         </View>
 
