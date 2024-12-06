@@ -1,8 +1,7 @@
 import { Stack } from 'expo-router';
-import { Pressable, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import KeyMetrics from '~/components/KeyMetrics';
 
-import { Container } from '~/components/Container';
-import { ScreenContent } from '~/components/ScreenContent';
 import { useAuth } from '~/context/auth';
 
 export default function Home() {
@@ -10,20 +9,26 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Home' }} />
-      <Container>
-        <ScreenContent path="app/(app)/index.tsx" title="Home" />
 
+      <ScrollView style={{flex:1,padding:15,backgroundColor:"white"}}>
 
+      
+      {/* KEY METRICS */}
+      <Text style={styles.header}>Key Metrics</Text>
+      <KeyMetrics/>
 
-
-
-      <Pressable className="border-cyan-500 p-8 border-2 mt-4 rounded" onPress={signOut}>
-      <Text>Sign Out</Text>  
-      </Pressable>
-
-
-
-      </Container>
+      </ScrollView>
     </>
   );
 }
+
+
+
+const styles = StyleSheet.create({
+    header:{
+      fontFamily:"Poppins-Bold",
+      fontSize:30,
+
+      marginBottom:5,
+    }
+})

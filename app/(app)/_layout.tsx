@@ -1,60 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Drawer } from 'expo-router/drawer';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Image, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { useAuth } from '~/context/auth';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
-import { router } from 'expo-router';
-// import CustomDrawerContent from '~/components/CustomDrawerContent';
+import { Link, router } from 'expo-router';
+import CustomDrawerContent from '~/components/CustomDrawerContent';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
-function CustomDrawerContent(props:any) {
-
-  const {signOut} = useAuth();
-  
-  const {top,bottom}= useSafeAreaInsets();
-  
-    return (
-      <View style={{flex:1}}>
-  
-      <DrawerContentScrollView 
-      {...props}>
-          
-      <View style={{padding:15,paddingBottom:50,flexDirection:"row",gap:15,alignItems:"center"}}>
-          <Image 
-          source={require("assets/profilePic.jpg")}
-          style={{width:70,height:70,borderRadius:50}}/>
-
-          <View style={{justifyContent:"center",flex:1}}>
-          <Text style={{fontFamily:"Poppins-Bold",fontSize:28,color:"#00ACAC",flexShrink:1}}>Mary Ann </Text>
-          <Text style={{fontFamily:"Poppins-Regular",fontSize:15}}>maryAnn@gmail.com</Text>
-          </View>
-      </View>
-      
-    
-      <DrawerItemList {...props}/>
-          
-      </DrawerContentScrollView>
-      <View 
-      style={{
-          borderTopColor:"#dde3fe",
-          borderTopWidth:1,
-          padding:20,
-          paddingBottom:20+bottom
-          
-      }}
-      >
-         <DrawerItem label={"Logout"} onPress={signOut}  icon={({ size, color }) => (
-          <AntDesign name="logout" size={size} color={color}/>
-        
-        )} />
-      </View>
- 
-      </View>)
-}
 
 
 
@@ -67,9 +23,28 @@ const DrawerLayout = () => (
   
   <Drawer 
   drawerContent={CustomDrawerContent}
+
   screenOptions={{
     drawerActiveBackgroundColor:"#AEE8E8",
     drawerActiveTintColor:"#00ACAC",
+    headerStyle:{  
+    backgroundColor:'white',
+    borderBottomWidth:1,
+    borderColor:"#D9D9D9",
+    elevation: 0, // Android shadow
+    shadowColor: "transparent", // iOS shadow
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+
+    },
+    headerTintColor: "#00ACAC",
+    headerTitleStyle: {
+      fontFamily:"Poppins-Light",
+ 
+      
+    },
+    
   }}
   >
 
@@ -81,7 +56,7 @@ const DrawerLayout = () => (
         headerTitleAlign:'center',
         headerTitle: 'Home',
         drawerLabel: 'Home',
-        headerRight:(()=><Image style={{borderRadius:60,width:40,height:40,marginRight:10}} source={require("assets/profilePic.jpg")} />),
+        
         drawerIcon: ({ size, color }) => <FontAwesome name="home" size={size} color={color} />,
       }}
     />
@@ -91,7 +66,7 @@ const DrawerLayout = () => (
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
         // when user clicks on navigation, send them back to gateway
-        router.replace("/(app)/(logging)/gateway")
+        router.push("/(app)/(logging)/gateway")
       },
     })}
      
@@ -99,7 +74,6 @@ const DrawerLayout = () => (
       headerTitleAlign:'center',
       headerTitle: 'Logging',
       drawerLabel: 'Logging',
-      headerRight:(()=><Image style={{borderRadius:60,width:40,height:40,marginRight:10}} source={require("assets/profilePic.jpg")} />),
       drawerIcon: ({ size, color }) => <FontAwesome name="book" size={24} color={color} />,
      }}
     />
@@ -117,7 +91,6 @@ const DrawerLayout = () => (
       headerTitleAlign:'center',
       headerTitle: 'Data Analytics',
       drawerLabel: 'Data Analytics',
-      headerRight:(()=><Image style={{borderRadius:60,width:40,height:40,marginRight:10}} source={require("assets/profilePic.jpg")} />),
       drawerIcon: ({ size, color }) => <FontAwesome name="bar-chart" size={24} color={color} />,
      }}
     />
@@ -136,7 +109,6 @@ const DrawerLayout = () => (
       headerTitleAlign:'center',
       headerTitle: 'Nutritionist Feedback',
       drawerLabel: 'Nutritionist Feedback',
-      headerRight:(()=><Image style={{borderRadius:60,width:40,height:40,marginRight:10}} source={require("assets/profilePic.jpg")} />),
       drawerIcon: ({ size, color }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />,
      }}
     />
@@ -156,25 +128,95 @@ const DrawerLayout = () => (
       headerTitleAlign:'center',
       headerTitle: 'Reminder',
       drawerLabel: 'Reminder',
-      headerRight:(()=><Image style={{borderRadius:60,width:40,height:40,marginRight:10}} source={require("assets/profilePic.jpg")} />),
       drawerIcon: ({ size, color }) => <MaterialCommunityIcons name="clock-alert-outline" size={size} color={color} />,
      }}
     />
   
   
+    <Drawer.Screen
+     name="(goals)"
+     listeners={({ navigation }) => ({
+      drawerItemPress: (e) => {
+        // when user clicks on navigation, send them back to gateway
+        router.replace("/(app)/(goals)/viewGoals")
+      },
+    })}
+     
+     options={{
+      headerTitleAlign:'center',
+      headerTitle: 'Goals',
+      drawerLabel: 'Goals',
+      drawerIcon: ({ size, color }) => <MaterialCommunityIcons name="flag" size={size} color={color} />,
+     }}
+    />
   
   
+  <Drawer.Screen
+     name="(membership)"
+     listeners={({ navigation }) => ({
+      drawerItemPress: (e) => {
+        // when user clicks on navigation, send them back to gateway
+        router.replace("/(app)/(membership)/viewMembership")
+      },
+    })}
+     
+     options={{
+      headerTitleAlign:'center',
+      headerTitle: 'Membership',
+      drawerLabel: 'Membership',
+      drawerIcon: ({ size, color }) => <AntDesign name="creditcard" size={size} color={color} />,
+     }}
+    />
   
   
+  <Drawer.Screen
+     name="(profile)"
+     listeners={({ navigation }) => ({
+      drawerItemPress: (e) => {
+        // when user clicks on navigation, send them back to gateway
+        router.replace("/(app)/(profile)/viewProfile")
+      },
+    })}
+     
+     options={{
+      headerTitleAlign:'center',
+      headerTitle: 'Profile',
+      drawerLabel: 'Profile',
+      drawerIcon: ({ size, color }) => <AntDesign name="user" size={size} color={color} />,
+     }}
+    />
   
-  
-  
-  
-  
+  <Drawer.Screen
+     name="(appReview)"
+     listeners={({ navigation }) => ({
+      drawerItemPress: (e) => {
+        // when user clicks on navigation, send them back to gateway
+        router.replace("/(app)/(appReview)/viewAppReviews")
+      },
+    })}
+     
+     options={{
+      headerTitleAlign:'center',
+      headerTitle: 'App Review',
+      drawerLabel: 'App Review',
+      drawerIcon: ({ size, color }) => <MaterialCommunityIcons name="comment-text-multiple" size={size} color={color} />,
+     }}
+    />
   
   
   </Drawer>
 
 );
 
+// const styles = StyleSheet.create({
+//   headerAvatar:{
+//     borderRadius:60,
+//     width:40,
+//     height:40,
+//     marginRight:10
+//   }
+// })
+
+
 export default DrawerLayout;
+
