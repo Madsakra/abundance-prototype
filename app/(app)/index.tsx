@@ -1,24 +1,33 @@
-import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import KeyMetrics from '~/components/KeyMetrics';
 
-import { useAuth } from '~/context/auth';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import KeyMetrics from '~/UI/Dashboard/KeyMetrics';
+
+import GoalsTracking from '~/UI/Dashboard/GoalsTracking';
 
 export default function Home() {
-  const {signOut} = useAuth();
+
+
+
+
+
+
   return (
-    <>
-      <Stack.Screen options={{ title: 'Home' }} />
+    <View style={{flex:1}}>
+    
 
-      <ScrollView style={{flex:1,padding:15,backgroundColor:"white"}}>
-
+      <ScrollView style={{padding:15,backgroundColor:"white"}}>
+    
       
       {/* KEY METRICS */}
       <Text style={styles.header}>Key Metrics</Text>
       <KeyMetrics/>
 
+      <Text style={styles.header}>Goals</Text>
+
+      <GoalsTracking/>
+
       </ScrollView>
-    </>
+    </View>
   );
 }
 
@@ -26,9 +35,12 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     header:{
-      fontFamily:"Poppins-Bold",
+      fontFamily:"Poppins-Regular",
       fontSize:30,
-
+      color:"#00ACAC",
       marginBottom:5,
-    }
+      padding:5
+    },
+
+
 })
