@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { Dimensions, StyleSheet, Text } from "react-native";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
 
 type CustomLineChartProps = {
@@ -25,7 +25,8 @@ export default function CustomLineChart({
     ,gradientEnd
 }:CustomLineChartProps) {
 
-
+    const screenWidth = Dimensions.get('window').width; // Get screen width
+    const screen60 = screenWidth * 0.6
 
   return (
     <>
@@ -49,7 +50,7 @@ export default function CustomLineChart({
          endOpacity={0.4}
         
          spacing={100}
-         width={200}
+         width={screen60}
          rulesColor="#CDCDCD"
          rulesType="solid"
          initialSpacing={40}

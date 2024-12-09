@@ -12,13 +12,14 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-sqlite",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
     },
-    
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {

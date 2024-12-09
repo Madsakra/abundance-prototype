@@ -3,9 +3,14 @@ import { Pressable, StyleSheet,Text,View } from "react-native"
 import CustomLineChart from "~/components/CustomLineChart";
 import MetricsSummary from "~/components/MetricsSummary";
 
-export default function KeyMetrics() {
+type KeyMetricsProps = {
+  activeTab: 'calories' | 'glucose',
+  setActiveTab: (tabChange:'calories'|'glucose') => void;
+}
 
-    const [activeTab, setActiveTab] = useState<'calories' | 'glucose'>('calories'); 
+
+export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
+
 
     const handleCaloriesTab = ()=>{
         setActiveTab('calories')
@@ -66,6 +71,9 @@ export default function KeyMetrics() {
 
         {value: 300, labelComponent:()=>customLabel('3.30 pm'), customDataPoint: customDataPoint},
         {value: 1200, labelComponent:()=>customLabel('7.30 pm'), customDataPoint: customDataPoint},
+        
+        {value: 600, labelComponent:()=>customLabel('9.30 pm'), customDataPoint: customDataPoint},
+
  
       ];
 
@@ -283,11 +291,11 @@ const styles = StyleSheet.create({
       summaryHeader:{
         fontFamily:"Poppins-Bold",
         fontSize:14,
-        
+        marginLeft:10
       },
 
       summaryValue:{
-        marginVertical:10, 
+        marginLeft:10, 
         fontFamily:"Poppins-Black",
         fontSize:20
       },

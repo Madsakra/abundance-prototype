@@ -8,6 +8,7 @@ import { Text, View } from 'react-native';
 
 
 
+
 export default function RootLayout() {
 
   const [loaded,error] = useFonts({
@@ -21,6 +22,13 @@ export default function RootLayout() {
     'Poppins-Black':require('../assets/fonts/Poppins-Black.ttf'),
   })
 
+
+
+
+
+
+
+  
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
@@ -30,6 +38,13 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
+
+
+
+
+
+
+
 
   return (
 
