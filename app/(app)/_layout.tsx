@@ -65,6 +65,7 @@ const DrawerLayout = () => (
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
         // when user clicks on navigation, send them back to gateway
+        e.preventDefault();
         router.push("/(app)/(logging)/gateway")
       },
     })}
@@ -81,6 +82,7 @@ const DrawerLayout = () => (
      name="(dataAnalytics)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(dataAnalytics)/gateway")
       },
@@ -99,6 +101,7 @@ const DrawerLayout = () => (
      name="(nutritionistFeedback)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(nutritionistFeedback)/allFeedback")
       },
@@ -118,6 +121,7 @@ const DrawerLayout = () => (
      name="(reminder)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(reminder)/viewReminder")
       },
@@ -136,6 +140,7 @@ const DrawerLayout = () => (
      name="(goals)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(goals)/viewGoals")
       },
@@ -154,6 +159,7 @@ const DrawerLayout = () => (
      name="(membership)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(membership)/viewMembership")
       },
@@ -172,6 +178,7 @@ const DrawerLayout = () => (
      name="(profile)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(profile)/viewProfile")
       },
@@ -189,6 +196,7 @@ const DrawerLayout = () => (
      name="(appReview)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
+        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(appReview)/viewAppReviews")
       },

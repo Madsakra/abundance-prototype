@@ -1,16 +1,32 @@
-import { Link } from "expo-router";
+import { FlashList } from "@shopify/flash-list";
+import { Link, RelativePathString } from "expo-router";
 import { Text, View } from "react-native";
+import GatewayCard from "~/components/GatewayCard";
+
+
+const gateWayList = [
+  {header:"Calories",link:"/(app)/(logging)/caloriesLogging" as RelativePathString,svg:"fire",color:"#C68F5E"},
+  {header:"Glucose",link:"/(app)/(logging)/glucoseLogging" as RelativePathString,svg:'cube-outline',color:"#DB8189"}
+];
 
 
 export default function gateway() {
   return (
-    <View style={{flex:1,justifyContent:"center","alignItems":"center"}}>
+    <View style={{flex:1,justifyContent:"space-evenly","alignItems":"center",width:"100%",height:"auto"}}>
         
-    <Text>GATEWAY </Text>
-    <Link href="/(app)/(logging)/caloriesLogging">
-    <Text>Go to logging</Text>
+ 
+
+    {gateWayList.map((item,index)=>(
+          <GatewayCard 
+          header={item.header} 
+          key={index}
+          link={item.link}
+          svg={item.svg}
+          color={item.color}
+          />
+    ))}
+  
     
-    </Link>
 
 
     </View>

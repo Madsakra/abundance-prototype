@@ -11,8 +11,9 @@ export default function Layout() {
       initialRouteName="gateway"
       >
       
-      <Stack.Screen name="gateway" options={{}} />
+      <Stack.Screen name="gateway"/>
       <Stack.Screen name="caloriesLogging"/>
+      <Stack.Screen name="glucoseLogging"/>
     </Stack>
   );
 }

@@ -38,9 +38,6 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
   };
 
 
-
-
-
   const customLabel = (val:string) => {
       return (
           <View style={{width: 70, marginLeft: 7}}>
@@ -48,21 +45,6 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
           </View>
       );
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     const caloriesData = [
@@ -196,15 +178,6 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
     }
 
 
-   
-
-
-
-
-
-
-
-
     </View>
   )
 }
@@ -231,14 +204,16 @@ const styles = StyleSheet.create({
     },
 
     nonSelectedNav:{
-        padding:5,
+        padding:8,
+        alignItems:"center",
         borderRadius:10,
         width:"50%",
 
     },
 
     selectedNav:{
-        padding:5,
+        padding:8,
+        alignItems:"center",
         borderRadius:10,
         width:"50%",
         backgroundColor:"white"
