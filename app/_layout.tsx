@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
-
+import * as DB from '../articleData';
 
 
 
@@ -22,6 +22,7 @@ export default function RootLayout() {
     'Poppins-Black':require('../assets/fonts/Poppins-Black.ttf'),
   })
 
+ 
 
 
 
@@ -31,7 +32,9 @@ export default function RootLayout() {
   
   useEffect(() => {
     if (loaded || error) {
+      DB.createTables();
       SplashScreen.hideAsync();
+      
     }
   }, [loaded, error]);
 

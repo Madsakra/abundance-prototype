@@ -2,6 +2,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 import { useEffect, useState } from "react";
 import * as DB from '../../articleData'
+import { FlashList } from "@shopify/flash-list";
+import ArticleCard from "~/components/ArticleCard";
 
 
 
@@ -11,11 +13,15 @@ type ArticleDataType = {
     category:string;
     author:string;
     content:string;
-    linkUrl:string;
 }
 
-
-
+// ONLY FOR PROTOTYPE TESTING
+const images = [
+    require("assets/testImages/calorieCut.jpg"),
+    require("assets/testImages/exercise.jpg"),
+    require("assets/testImages/sugar.jpg"),
+    require("assets/testImages/burnFats.jpg")
+]
 
 
 
@@ -26,7 +32,7 @@ type ArticleDataType = {
 export default function Articles() {
 
 const [articles,setArticles] = useState<ArticleDataType[]>([]);
-
+const [loading,setLoading] = useState(true);
 
 const queryDB = async ()=>{
     const queryArticles = await DB.db.getAllAsync('SELECT * FROM Articles');
@@ -39,36 +45,26 @@ const queryDB = async ()=>{
     }
 
     setArticles(tempContainer);
+    setLoading(false);
 }
 
 
 
 useEffect(()=>{
     queryDB();
-    console.log(articles);
 },[])
 
   return (
     <View style={styles.container}>
         
-        <View style={{width:"100%",height:"auto",
-            borderRadius:5,flexDirection:"row",gap:20,
-            justifyContent:"space-between",alignItems:"center",
-            paddingHorizontal:5
-            }}>
-
-            <View style={{maxWidth:"60%",height:"auto",gap:2}}>
-                <Text style={{fontFamily:"Poppins-Bold",fontSize:15}}>Tips to cut calories</Text>
-                <Text style={{fontFamily:"Poppins-Regular",color:"#929292"}}>Calorie Cutting</Text>
-                <Text style={{fontFamily:"Poppins-Medium",color:"#929292"}}>By Dr Johnny Sins</Text>
-            </View>
-
-            <Image source={require("assets/testImages/calorieCut.jpg")} style={{width:70,height:70,borderRadius:5}}/>
-
-        </View>
-
-
-
+        <FlashList
+        data={articles}
+        renderItem={({item,index})=>
+        <ArticleCard articleID={item.id} articleTitle={item.name} articleCategory={item.category} author={item.author} image={images[index]}/>
+        }
+        estimatedItemSize={200}
+        
+        />
     </View>
   )
 }

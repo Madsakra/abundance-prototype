@@ -10,7 +10,7 @@ import Articles from '~/UI/Dashboard/Articles';
 import * as DB from '../../articleData';
 import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
 
-// DB.createTables();
+
 
 export default function Home() {
 

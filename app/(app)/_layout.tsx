@@ -29,7 +29,6 @@ const DrawerLayout = () => (
     drawerActiveTintColor:"#00ACAC",
     headerStyle:{  
     backgroundColor:'white',
-    borderBottomWidth:1,
     borderColor:"#D9D9D9",
     elevation: 0, // Android shadow
     shadowColor: "transparent", // iOS shadow
@@ -203,6 +202,16 @@ const DrawerLayout = () => (
      }}
     />
   
+  <Drawer.Screen
+    name="(articles)/[id]"
+    options={{
+      drawerItemStyle: { display: 'none' },
+      headerTitle:"Article",
+      headerTitleAlign:"center"
+    }}
+  />
+
+
   
   </Drawer>
 
