@@ -12,8 +12,11 @@ export default function Layout() {
       >
       
       <Stack.Screen name="gateway"/>
-      <Stack.Screen name="caloriesLogging"/>
-      <Stack.Screen name="glucoseLogging"/>
+      <Stack.Screen name="calories/caloriesLogging"/>
+      <Stack.Screen name="calories/caloriesGraph"/>
+
+      <Stack.Screen name="glucose/glucoseLogging"/>
+      
     </Stack>
   );
 }

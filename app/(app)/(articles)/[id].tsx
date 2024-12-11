@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
-import { View, Text, StyleSheet, Image, ImageSourcePropType,ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageSourcePropType,ScrollView, Dimensions } from 'react-native';
 import { db } from '~/articleData';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +10,12 @@ type Article= {
     author:string;
     content:string;
 }
+
+ const { width, height } = Dimensions.get('window');
+
+  // Calculate 90% of width and height
+  const width90 = width * 0.9;
+  const height90 = height * 1;
 
 
 export default function ArticleDetailsScreen() {
@@ -78,9 +84,9 @@ useEffect(()=>{
     <View style={styles.container}>
     {loading?
         <Text>Loading...</Text>:
-        <ScrollView>
+       
 
-          <View style={{width:"100%",gap:2}}>
+          <ScrollView>
           <Image source={image} style={styles.image} />
             <Text style={{fontFamily:"Poppins-Medium",fontSize:24}}>{article?.name}</Text>
 
@@ -91,10 +97,11 @@ useEffect(()=>{
     
             <Text style={styles.content}>{article?.content}</Text>
 
-          </View>
 
-        
-        </ScrollView>
+
+          </ScrollView>
+
+       
     }
 
 
@@ -105,14 +112,15 @@ useEffect(()=>{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding:10
+    flex:1, 
+    padding:10,
+   
   },
 
   image:{
     width:"100%",
     borderRadius:5,
-    height:"60%",
+    height:250,
     marginBottom:20,
   },
 
@@ -125,7 +133,8 @@ const styles = StyleSheet.create({
   content:{
     marginTop:15,
     fontSize:15,
-    fontFamily:"Poppins-Regular"
+    fontFamily:"Poppins-Regular",
+    
   }
 });
 

@@ -10,7 +10,7 @@ export default function Layout() {
   
       >
       
-      <Stack.Screen name="viewMembership" options={{}} />
+      <Stack.Screen name="viewDataCorrelation" options={{}} />
     </Stack>
   );
 }

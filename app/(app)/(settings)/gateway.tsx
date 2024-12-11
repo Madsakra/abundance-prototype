@@ -6,7 +6,7 @@ export default function gateway() {
   return (
     <View style={{flex:1,justifyContent:"center","alignItems":"center"}}>
         
-    <Text>GATEWAY FOR DATA ANALYTICS</Text>
+    <Text>View Settings</Text>
 
     {/* <Link href="/(app)/(logging)/caloriesLogging">
     <Text>Go to logging</Text>
