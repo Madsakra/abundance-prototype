@@ -1,7 +1,7 @@
 import { KeyboardTypeOptions, StyleProp, Text, TextInput, TextStyle, View } from "react-native";
 
 type CustomTextInputProps <T> = {
-    label:string;
+    label?:string;
     inputValue: T | null;
     setInputValue: (value: T | null) => void; // Accepts T or null
     placeHolder:string;

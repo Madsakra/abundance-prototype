@@ -1,8 +1,61 @@
 import React from 'react'
-import { Image, Pressable, ScrollView, Text, View } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign';
+import RecordsTable from '~/UI/Dashboard/RecordsTable';
+import { Link, router } from 'expo-router';
+import RecordTopButton from '~/components/RecordTopButton';
+import FunctionTiedButton from '~/components/FunctionTiedButton';
+
+
+
 
 export default function caloriesLogging() {
+
+  // HARDCODED DATA FOR PROTOTYPE
+  // SUPPOSED TO MAKE API CALL HERE
+
+  const caloriesIntakeData = 
+    {
+      tableHeader:"Calories Intake",
+      tableData:[
+        {
+          image:require("assets/testImages/nasi1.jpg"),
+          itemDescription:"Nasi Lemak",
+          itemSubheading:"364 kcal/serving",
+          editable:true,
+          operation:'minus'
+        },
+        {
+          image:require("assets/testImages/nasi2.jpg"),
+          itemDescription:"Nasi Lemak 2",
+          itemSubheading:"364 kcal/serving",
+          editable:true,
+          operation:'minus'
+        },
+        {
+          image:require("assets/testImages/nasi1.jpg"),
+          itemDescription:"Nasi Lemak",
+          itemSubheading:"364 kcal/serving",
+          editable:true,
+          operation:'minus'
+        },
+
+        
+        
+      ],
+      topButtonRef:"/"
+    }
+  
+
+    const redirectToAddMeals = ()=>{
+      router.replace('/calories/addMeals')
+    }
+
+    const redirectToLogOutput = ()=>{
+      router.replace('/')
+    }
+    
+
   return (
     
     <ScrollView style={{padding:20}}>
@@ -10,44 +63,41 @@ export default function caloriesLogging() {
         <Text style={{fontFamily:"Poppins-Bold",fontSize:20}}>Calories Logging</Text>
 
 
-        {/* UI BEGINS HERE*/}
+        {/* CALORIE INTAKE SECTION*/}
         {/* TOP BUTTON*/}
-        <View style={{width:"100%",height:"auto",marginVertical:"8%"}}>
-          <Pressable style={{backgroundColor:"#C68F5E",width:"45%",height:40,marginBottom:15,alignSelf:"flex-end",justifyContent:"center",alignItems:"center",borderRadius:5}}>
-            <Text style={{textAlign:"center",fontFamily:"Poppins-Bold",fontSize:15,color:"white"}}>Add Meals</Text>
-          </Pressable>
+        <View style={{flex:1,marginVertical:"8%"}}>
 
-
-          {/*SUB COMPONENT HERE*/}
-          {/*INSIDE BOX*/}
-          <View style={{width:"100%",padding:10,borderWidth:1,height:250,borderRadius:10,gap:5,borderColor:"#CFCFCF"}}>
-            <Text style={{fontFamily:"Poppins-Bold",fontSize:15,borderWidth:1,padding:10,borderTopLeftRadius:10,borderTopRightRadius:10,borderColor:"#CFCFCF"}}>Calorie Intake</Text>
-
-
-
-            {/* SINGLE ITEM COMPONENT -- TO USE FLASH LIST AND RENDER ALL*/}
-            <View style={{width:"100%",padding:15,borderWidth:1,height:"auto",borderRadius:5,gap:10,borderColor:"#CFCFCF",flexDirection:"row",alignItems:"center"}}>
-              <Image source={require("assets/testImages/nasi1.jpg")} style={{width:60,height:60,borderRadius:5}} />
-              
-              <View style={{justifyContent:"space-between",flexDirection:"row",flex:1,alignItems:"center"}}>
-              <View style={{maxWidth:150}}>
-                <Text style={{fontFamily:"Poppins-Bold"}}>Nasi Lemak</Text>
-                <Text style={{fontFamily:"Poppins-Medium",color:"#484848"}}>364 kcal/ serving</Text>
-              </View>
-
-              <Pressable style={{width:24,height:24,backgroundColor:"#D9D9D9",borderRadius:5,justifyContent:"center",alignItems:"center"}}>
-              <AntDesign name="minus" size={20} color="black" />
-              </Pressable>
-              </View>
-            </View>
-          
-          
+          <RecordTopButton buttonText="Add Meals" bgColor='#C68F5E' redirect={redirectToAddMeals}/>
+          {/*SUB COMPONENT HERE UNDER UI FOLDER*/}
+          <RecordsTable 
+          tableHeader={caloriesIntakeData.tableHeader}
+          tableData={caloriesIntakeData.tableData}
+          />
       
-          </View>
+          <FunctionTiedButton onPress={redirectToLogOutput} 
+          title="Log Output" 
+          buttonStyle={styles.buttonContainer}
+          textStyle={styles.textStyle}/>
 
-      
+
         </View>
 
     </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  buttonContainer:{
+    marginTop:5,
+    padding:15,
+    backgroundColor:"#C68F5E",
+    borderRadius:10,
+  },
+
+  textStyle:{
+    textAlign:"center",
+    fontFamily:"Poppins-Bold",
+    color:"white",
+    fontSize:15,
+  }
+})

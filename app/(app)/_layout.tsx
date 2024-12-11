@@ -9,7 +9,6 @@ import { Link, router } from 'expo-router';
 // import CustomDrawerContent from '~/components/CustomDrawerContent';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useState } from 'react';
 
 
 
