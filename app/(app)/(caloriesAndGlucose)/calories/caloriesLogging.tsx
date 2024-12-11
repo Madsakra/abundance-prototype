@@ -1,50 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import RecordsTable from '~/UI/Dashboard/RecordsTable';
 import { Link, router } from 'expo-router';
 import RecordTopButton from '~/components/RecordTopButton';
 import FunctionTiedButton from '~/components/FunctionTiedButton';
+import * as DB from '../../../../sqlDatabase'
+import { RecordCardProps } from '~/app-env';
 
 
 
 
 export default function caloriesLogging() {
 
+  
   // HARDCODED DATA FOR PROTOTYPE
   // SUPPOSED TO MAKE API CALL HERE
 
-  const caloriesIntakeData = 
-    {
-      tableHeader:"Calories Intake",
-      tableData:[
-        {
-          image:require("assets/testImages/nasi1.jpg"),
-          itemDescription:"Nasi Lemak",
-          itemSubheading:"364 kcal/serving",
-          editable:true,
-          operation:'minus'
-        },
-        {
-          image:require("assets/testImages/nasi2.jpg"),
-          itemDescription:"Nasi Lemak 2",
-          itemSubheading:"364 kcal/serving",
-          editable:true,
-          operation:'minus'
-        },
-        {
-          image:require("assets/testImages/nasi1.jpg"),
-          itemDescription:"Nasi Lemak",
-          itemSubheading:"364 kcal/serving",
-          editable:true,
-          operation:'minus'
-        },
+  const [records,setRecords] = useState<RecordCardProps[]>([]);
+  const [loading,setLoading] = useState(true);
 
-        
-        
-      ],
-      topButtonRef:"/"
-    }
+  const queryDB = async ()=>{
+      const queryRecord = await DB.db.getAllAsync('SELECT * FROM CaloriesIntake');
+      let tempContainer:RecordCardProps[] = [];
+      for (const record of queryRecord)
+      {
+          
+          const typedArticle = record as RecordCardProps;
+          tempContainer.push(typedArticle);
+      }
+
+      setRecords(tempContainer);
+      setLoading(false);
+  }
+
+
+  const calorieIntakeImages = require("assets/testImages/placeholder.jpg");
+   
+  
+
+
   
 
     const redirectToAddMeals = ()=>{
@@ -55,7 +50,19 @@ export default function caloriesLogging() {
       router.replace('/')
     }
     
+  useEffect(()=>{
+    queryDB();
+  },[])
 
+  if (loading)
+  {
+    return <Text>Loading...</Text>
+  }
+
+
+
+  if (!loading)
+  {
   return (
     
     <ScrollView style={{padding:20}}>
@@ -70,12 +77,13 @@ export default function caloriesLogging() {
           <RecordTopButton buttonText="Add Meals" bgColor='#C68F5E' redirect={redirectToAddMeals}/>
           {/*SUB COMPONENT HERE UNDER UI FOLDER*/}
           <RecordsTable 
-          tableHeader={caloriesIntakeData.tableHeader}
-          tableData={caloriesIntakeData.tableData}
+          tableHeader="Calories Intake"
+          tableData={records}
+          image={calorieIntakeImages}
           />
       
           <FunctionTiedButton onPress={redirectToLogOutput} 
-          title="Log Output" 
+          title="Next" 
           buttonStyle={styles.buttonContainer}
           textStyle={styles.textStyle}/>
 
@@ -84,7 +92,7 @@ export default function caloriesLogging() {
 
     </ScrollView>
   )
-}
+}}
 
 const styles = StyleSheet.create({
   buttonContainer:{

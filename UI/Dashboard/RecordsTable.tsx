@@ -1,11 +1,28 @@
-import {StyleSheet, Text, View } from "react-native";
+import {Pressable, StyleSheet, Text, View } from "react-native";
 import RecordCard from "~/components/RecordCard";
 import { RecordTableProps } from "~/app-env";
 import { FlashList } from "@shopify/flash-list";
+import { AntDesign } from "@expo/vector-icons";
 
 
 
-export default function RecordsTable({tableHeader,tableData}:RecordTableProps) {
+export default function RecordsTable({image,tableHeader,tableData}:RecordTableProps) {
+
+  const customMinusButton = ()=>{
+    return (
+      <Pressable 
+      style={{  
+        padding:5,
+        backgroundColor:"#D9D9D9",
+        borderRadius:5,
+        justifyContent:"center",
+        alignItems:"center"}}>
+        <AntDesign name="minus" size={24} color="black" />
+      </Pressable>
+    )
+  }
+
+
   return (
     <View style={styles.recordContainer}>
       <View style={styles.headerContainer}>
@@ -21,12 +38,12 @@ export default function RecordsTable({tableHeader,tableData}:RecordTableProps) {
     nestedScrollEnabled={true}
     renderItem={({item,index})=>
     <RecordCard
-    key={index}
-    image={item.image}
+    id={item.id}
+    key={item.id}
+    image={image}
     itemDescription={item.itemDescription}
     itemSubheading={item.itemSubheading}
-    editable={item.editable}
-    operation={item.operation}
+    customButton={customMinusButton()}
     />
     }
     

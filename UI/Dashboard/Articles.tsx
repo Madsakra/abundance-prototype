@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 
 import { useEffect, useState } from "react";
-import * as DB from '../../articleData'
+import * as DB from '../../sqlDatabase'
 import { FlashList } from "@shopify/flash-list";
 import ArticleCard from "~/components/ArticleCard";
 

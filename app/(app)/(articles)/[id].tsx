@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import { View, Text, StyleSheet, Image, ImageSourcePropType,ScrollView, Dimensions } from 'react-native';
-import { db } from '~/articleData';
+import { db } from '~/sqlDatabase';
 import { useEffect, useState } from 'react';
 
 type Article= {

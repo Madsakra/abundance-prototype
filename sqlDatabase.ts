@@ -30,8 +30,56 @@ VALUES (4, 'Eat What you Burn', 'Calories', 'Dr MacLauren', 'Lorem ipsum dolor s
 };
 
 
+export async function createCaloriesLog(){
+    await db.execAsync(`
+        PRAGMA journal_mode = WAL;
+    
+    CREATE TABLE IF NOT EXISTS CaloriesIntake (
+    id INTEGER PRIMARY KEY NOT NULL,
+    itemDescription TEXT,
+    itemSubheading TEXT,
+    editable BOOLEAN,
+    operation TEXT);
+    
+    INSERT OR IGNORE INTO CaloriesIntake (id,itemDescription, itemSubheading, editable, operation)
+    VALUES(1,'Nasi Lemak','364 kcal/serving',1,'minus');  
+
+    INSERT OR IGNORE INTO CaloriesIntake (itemDescription, itemSubheading, editable, operation)
+    VALUES(2,'Coke','150 kcal/serving',1,'minus');  
+
+    `);
+    };
 
 
+    export async function createCaloriesOptions(){
+        await db.execAsync(`
+            PRAGMA journal_mode = WAL;
+        
+        CREATE TABLE IF NOT EXISTS CaloriesOptions (
+        id INTEGER PRIMARY KEY NOT NULL,
+        itemDescription TEXT,
+        itemSubheading TEXT,
+        editable BOOLEAN,
+        operation TEXT);
+        
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(1,'Apple Pie','300 kcal/serving',1,'plus');  
+    
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(2,'Burrito','450 kcal/serving',1,'plus');  
+
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(3,'Coke','150 kcal/serving',1,'plus');  
+    
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(4,'Dumplings','200 kcal/serving',1,'plus');  
+
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(5,'Eggplant Parmesan','350 kcal/serving',1,'plus');  
+
+        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
+        VALUES(6,'Fettuccine Alfredo','600 kcal/serving',1,'plus');  
 
 
-
+        `);
+        };

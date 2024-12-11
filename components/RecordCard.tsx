@@ -1,13 +1,17 @@
 import { AntDesign } from '@expo/vector-icons'
+import { Link } from 'expo-router'
 import React from 'react'
 import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-native'
 import { RecordCardProps } from '~/app-env'
 
 
-export default function RecordCard({image,itemDescription,itemSubheading,editable,operation}:RecordCardProps) {
+export default function RecordCard({image,itemDescription,itemSubheading,customButton}:RecordCardProps) {
   return (
     <View style={styles.container}>
-    <Image source={image} style={styles.image} />
+    {
+      image &&
+      <Image source={image} style={styles.image} /> 
+    }
     
     <View style={styles.textContainer}>
     <View style={{maxWidth:150}}>
@@ -15,14 +19,9 @@ export default function RecordCard({image,itemDescription,itemSubheading,editabl
       <Text style={{fontFamily:"Poppins-Medium",color:"#484848"}}>{itemSubheading}</Text>
     </View>
 
-    {editable &&
-    <Pressable style={styles.removeButton}>
-     {operation==='minus'?
-    <AntDesign name="minus" size={20} color="black" />:
-      <AntDesign name="plus" size={18} color="black" />
-    } 
-    </Pressable>    
-    }
+    {customButton}
+ 
+    
     
 
     </View>
@@ -57,8 +56,7 @@ const styles = StyleSheet.create({
     },
 
     removeButton:{
-        width:24,
-        height:24,
+        padding:5,
         backgroundColor:"#D9D9D9",
         borderRadius:5,
         justifyContent:"center",

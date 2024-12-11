@@ -1,18 +1,22 @@
 // @ts-ignore
 /// <reference types="nativewind/types" />
 
+import { ReactNode } from "react";
+
 
 
 export type RecordCardProps = {
-    image:ImageProps;
+    id:number;
+    image?:ImageProps;
     itemDescription:string;
     itemSubheading:string;
-    editable:boolean;
-    operation:string;
+    customButton?:ReactNode
 }
 
 
 export type RecordTableProps = {
+    // ONLY FOR TESTING
+    image?:ImageProps;
     tableHeader:string;
     tableData: RecordCardProps[];
 }

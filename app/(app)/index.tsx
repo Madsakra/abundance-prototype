@@ -7,7 +7,7 @@ import MealReccomen from '~/UI/Dashboard/MealReccomen';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import Articles from '~/UI/Dashboard/Articles';
-import * as DB from '../../articleData';
+import * as DB from '../../sqlDatabase';
 import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
 
 

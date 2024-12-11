@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import * as DB from '../articleData';
+import * as DB from '../sqlDatabase';
 
 
 
@@ -33,6 +33,8 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded || error) {
       DB.createTables();
+      DB.createCaloriesLog();
+      DB.createCaloriesOptions();
       SplashScreen.hideAsync();
       
     }
