@@ -30,7 +30,7 @@ export default function Home() {
     name:'axmen',
     email:'yhj@gmail.com',
     token:'hash1241241',
-    profileID:'24124'
+    profileID:''
   }
 
 

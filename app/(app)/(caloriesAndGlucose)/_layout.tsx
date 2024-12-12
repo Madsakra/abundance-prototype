@@ -12,9 +12,12 @@ export default function Layout() {
       >
       
       <Stack.Screen name="gateway"/>
-      <Stack.Screen name="calories/caloriesLogging"/>
+      <Stack.Screen name="calories/caloriesInput"/>
       <Stack.Screen name="calories/caloriesGraph"/>
       <Stack.Screen name="calories/addMeals"/>
+      <Stack.Screen name="calories/caloriesOutput"/>
+      <Stack.Screen name="calories/addActivity"/>
+      <Stack.Screen name="calories/netCalories"/>
 
 
 

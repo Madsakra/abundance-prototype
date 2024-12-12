@@ -6,20 +6,24 @@ import { AntDesign } from "@expo/vector-icons";
 
 
 
-export default function RecordsTable({image,tableHeader,tableData}:RecordTableProps) {
+export default function RecordsTable({image,tableHeader,tableData,totalCalories,finalTabName,editable}:RecordTableProps) {
 
   const customMinusButton = ()=>{
-    return (
-      <Pressable 
-      style={{  
-        padding:5,
-        backgroundColor:"#D9D9D9",
-        borderRadius:5,
-        justifyContent:"center",
-        alignItems:"center"}}>
-        <AntDesign name="minus" size={24} color="black" />
-      </Pressable>
-    )
+    if (editable)
+    {
+      return (
+        <Pressable 
+        style={{  
+          padding:5,
+          backgroundColor:"#D9D9D9",
+          borderRadius:5,
+          justifyContent:"center",
+          alignItems:"center"}}>
+          <AntDesign name="minus" size={24} color="black" />
+        </Pressable>
+      )
+    }
+
   }
 
 
@@ -41,15 +45,23 @@ export default function RecordsTable({image,tableHeader,tableData}:RecordTablePr
     id={item.id}
     key={item.id}
     image={image}
-    itemDescription={item.itemDescription}
-    itemSubheading={item.itemSubheading}
+    foodName={item.foodName}
+    calories={item.calories}
+    unitMeasurement={item.unitMeasurement}
+    
     customButton={customMinusButton()}
     />
     }
     
     />
   
-  
+    <RecordCard
+    id={1000000}
+    image={image}
+    foodName={finalTabName}
+    unitMeasurement="Kcal"
+    calories={totalCalories}
+    />
 
   </View>
   )
@@ -59,13 +71,13 @@ export default function RecordsTable({image,tableHeader,tableData}:RecordTablePr
 const styles = StyleSheet.create({
     recordContainer:{
         width:"100%",
-        padding:0,
+
         borderWidth:1,
         height:350,
         borderRadius:10,
         gap:5,
         borderColor:"#CFCFCF",
-        marginBottom:25,
+        marginBottom:35,
      
     },
 

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import RecordsTable from '~/UI/Dashboard/RecordsTable';
-import { Link, router } from 'expo-router';
+import {  router } from 'expo-router';
 import RecordTopButton from '~/components/RecordTopButton';
 import FunctionTiedButton from '~/components/FunctionTiedButton';
 import * as DB from '../../../../sqlDatabase'
@@ -47,7 +46,7 @@ export default function caloriesLogging() {
     }
 
     const redirectToLogOutput = ()=>{
-      router.replace('/')
+      router.replace('/calories/caloriesOutput')
     }
     
   useEffect(()=>{
@@ -67,7 +66,7 @@ export default function caloriesLogging() {
     
     <ScrollView style={{padding:20}}>
         {/*Main Container*/}
-        <Text style={{fontFamily:"Poppins-Bold",fontSize:20}}>Calories Logging</Text>
+        <Text style={{fontFamily:"Poppins-Bold",fontSize:20}}>Net Calories Intake</Text>
 
 
         {/* CALORIE INTAKE SECTION*/}
@@ -80,6 +79,9 @@ export default function caloriesLogging() {
           tableHeader="Calories Intake"
           tableData={records}
           image={calorieIntakeImages}
+          totalCalories={450}
+          finalTabName="Total Calories Intake"
+          editable={true}
           />
       
           <FunctionTiedButton onPress={redirectToLogOutput} 

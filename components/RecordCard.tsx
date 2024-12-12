@@ -1,11 +1,14 @@
 import { AntDesign } from '@expo/vector-icons'
 import { Link } from 'expo-router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-native'
 import { RecordCardProps } from '~/app-env'
 
 
-export default function RecordCard({image,itemDescription,itemSubheading,customButton}:RecordCardProps) {
+export default function RecordCard({image,foodName,calories,unitMeasurement,customButton}:RecordCardProps) {
+
+
+  
   return (
     <View style={styles.container}>
     {
@@ -14,9 +17,9 @@ export default function RecordCard({image,itemDescription,itemSubheading,customB
     }
     
     <View style={styles.textContainer}>
-    <View style={{maxWidth:150}}>
-      <Text style={{fontFamily:"Poppins-Bold"}}>{itemDescription}</Text>
-      <Text style={{fontFamily:"Poppins-Medium",color:"#484848"}}>{itemSubheading}</Text>
+    <View>
+      <Text style={{fontFamily:"Poppins-Bold"}}>{foodName}</Text>
+      <Text style={{fontFamily:"Poppins-Medium",color:"#484848"}}>{calories+" "+unitMeasurement}</Text>
     </View>
 
     {customButton}
@@ -30,16 +33,18 @@ export default function RecordCard({image,itemDescription,itemSubheading,customB
 }
 
 
+
+
 const styles = StyleSheet.create({
     container:{
     width:"100%",
     padding:15,
     borderTopWidth:1,
-    height:"auto",
+    height:100,
     gap:10,
     borderColor:"#CFCFCF",
     flexDirection:"row",
-    alignItems:"center"
+    alignItems:"center",
     },
 
     image:{

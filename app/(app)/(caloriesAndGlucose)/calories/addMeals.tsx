@@ -33,14 +33,14 @@ export default function addMeals() {
   const handleFilter = (text: string) => {
     setFoodName(text);
     const filtered = records.filter((record) =>
-      record.itemDescription.toLowerCase().startsWith(text.toLowerCase())
+      record.foodName.toLowerCase().startsWith(text.toLowerCase())
     );
     setFilteredRecords(filtered);
   };
 
 
   const queryDB = async ()=>{
-      const queryRecord = await DB.db.getAllAsync('SELECT * FROM CaloriesOptions');
+      const queryRecord = await DB.db.getAllAsync('SELECT * FROM FoodOptions');
       let tempContainer:RecordCardProps[] = [];
       for (const record of queryRecord)
       {
@@ -64,7 +64,7 @@ export default function addMeals() {
       }}
 
       style={{  
-        padding:5,
+        padding:20,
         backgroundColor:"#D9D9D9",
         borderRadius:5,
         justifyContent:"center",
@@ -121,8 +121,11 @@ export default function addMeals() {
               <RecordCard
               id={item.id}
               key={index}
-              itemDescription={item.itemDescription}
-              itemSubheading={item.itemSubheading}
+              foodName={item.foodName}
+              calories={item.calories}
+              unitMeasurement={item.unitMeasurement}
+              protein={item.protein}
+              carbs={item.carbs}
               customButton={customAddButton(item.id)}
               image={calorieOptionsImages[item.id-1]}
               />
@@ -131,7 +134,7 @@ export default function addMeals() {
             />
             </View>
 
-            <Link href="/calories/caloriesLogging" style={styles.bottomButton}>
+            <Link href="/calories/caloriesInput" style={styles.bottomButton}>
               <Text style={styles.buttonText}>Go Back</Text>
             </Link>
 

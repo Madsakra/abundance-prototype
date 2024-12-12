@@ -35,6 +35,7 @@ export default function RootLayout() {
       DB.createTables();
       DB.createCaloriesLog();
       DB.createCaloriesOptions();
+      DB.createCaloriesOutput();
       SplashScreen.hideAsync();
       
     }

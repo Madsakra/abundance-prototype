@@ -8,9 +8,14 @@ import { ReactNode } from "react";
 export type RecordCardProps = {
     id:number;
     image?:ImageProps;
-    itemDescription:string;
-    itemSubheading:string;
-    customButton?:ReactNode
+    foodName:string,
+    calories:number,
+    unitMeasurement:string;
+    customButton?:ReactNode;
+    carbs?:number;
+    fats?:number;
+    protein?:number; 
+    
 }
 
 
@@ -19,4 +24,8 @@ export type RecordTableProps = {
     image?:ImageProps;
     tableHeader:string;
     tableData: RecordCardProps[];
+    finalTabName:string,
+    // FOR PROTOTPYE
+    totalCalories:number;
+    editable?:boolean;
 }

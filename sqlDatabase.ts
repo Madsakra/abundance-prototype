@@ -36,50 +36,85 @@ export async function createCaloriesLog(){
     
     CREATE TABLE IF NOT EXISTS CaloriesIntake (
     id INTEGER PRIMARY KEY NOT NULL,
-    itemDescription TEXT,
-    itemSubheading TEXT,
-    editable BOOLEAN,
-    operation TEXT);
+    foodName TEXT,
+    calories INTEGER,
+    unitMeasurement TEXT,
+    timeConsumed TEXT
+    );
     
-    INSERT OR IGNORE INTO CaloriesIntake (id,itemDescription, itemSubheading, editable, operation)
-    VALUES(1,'Nasi Lemak','364 kcal/serving',1,'minus');  
+    INSERT OR IGNORE INTO CaloriesIntake (id,foodName,calories, unitMeasurement, timeConsumed)
+    VALUES(1,'Nasi Lemak',300,'Kcal','Breakfast');  
 
-    INSERT OR IGNORE INTO CaloriesIntake (itemDescription, itemSubheading, editable, operation)
-    VALUES(2,'Coke','150 kcal/serving',1,'minus');  
+    INSERT OR IGNORE INTO CaloriesIntake (id,foodName,calories, unitMeasurement, timeConsumed)
+    VALUES(2,'Coke',150,'Kcal','Breakfast');  
+
+    
 
     `);
     };
 
 
+
+    
+
     export async function createCaloriesOptions(){
         await db.execAsync(`
             PRAGMA journal_mode = WAL;
         
-        CREATE TABLE IF NOT EXISTS CaloriesOptions (
+        CREATE TABLE IF NOT EXISTS FoodOptions (
         id INTEGER PRIMARY KEY NOT NULL,
-        itemDescription TEXT,
-        itemSubheading TEXT,
-        editable BOOLEAN,
-        operation TEXT);
+        foodName TEXT,
+        calories INTEGER,
+        unitMeasurement TEXT,
+        carbs INTEGER,
+        fats INTEGER,
+        protein INTEGER);
         
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(1,'Apple Pie','300 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions (id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(1,'Apple Pie',300,'Kcal',20,30,40);  
     
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(2,'Burrito','450 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions (id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(2,'Burrito',450,'Kcal',20,30,50);  
 
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(3,'Coke','150 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions (id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(3,'Coke',150,'Kcal',30,20,10);  
     
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(4,'Dumplings','200 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions(id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(4,'Dumplings',200,'Kcal',20,20,20);  
 
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(5,'Eggplant Parmesan','350 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions(id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(5,'Eggplant Parmesan',350,'Kcal',20,40,40);  
 
-        INSERT OR IGNORE INTO CaloriesOptions (id,itemDescription, itemSubheading, editable, operation)
-        VALUES(6,'Fettuccine Alfredo','600 kcal/serving',1,'plus');  
+        INSERT OR IGNORE INTO FoodOptions(id,foodName,calories,unitMeasurement,carbs,fats,protein)
+        VALUES(6,'Fettuccine Alfredo',600,'Kcal',50,50,40);  
 
 
         `);
         };
+
+
+
+
+export async function createCaloriesOutput(){
+            await db.execAsync(`
+                PRAGMA journal_mode = WAL;
+            
+            CREATE TABLE IF NOT EXISTS CaloriesOutput(
+            id INTEGER PRIMARY KEY NOT NULL,
+            foodName TEXT,
+            calories INTEGER,
+            unitMeasurement TEXT,
+            timeConsumed TEXT
+            );
+            
+            INSERT OR IGNORE INTO CaloriesOutput (id,foodName,calories, unitMeasurement, timeConsumed)
+            VALUES(1,'Walking',125,'Kcal','Breakfast');  
+        
+            INSERT OR IGNORE INTO CaloriesOutput (id,foodName,calories, unitMeasurement, timeConsumed)
+            VALUES(2,'Jogging',170,'Kcal','Breakfast');  
+        
+            
+        
+            `);
+            };
+        
