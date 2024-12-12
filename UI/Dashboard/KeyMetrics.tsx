@@ -125,7 +125,7 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
 
 
       {activeTab === 'calories'?
-      <>
+      <View>
       <MetricsSummary
       mainColor="#C68F5E"
       infoHeader="Latest Consumed Calories"
@@ -148,9 +148,9 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
       valueText={styles.summaryValue}
       />
 
-      </>
+      </View>
       :  
-      <>
+      <View>
       <MetricsSummary
       mainColor="#DB8189"
       infoHeader="Latest Glucose Levels"
@@ -173,7 +173,7 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
       valueText={styles.summaryValue}
       />
 
-      </>
+      </View>
     
     }
 

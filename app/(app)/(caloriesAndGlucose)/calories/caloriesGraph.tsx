@@ -162,11 +162,14 @@ export default function caloriesGraph() {
     </View>
 
     <Link href="/calories/caloriesInput" 
-    style={{borderWidth:1,padding:20,width:"70%",marginBottom:30,borderRadius:5}}>
+    style={{borderWidth:2,borderColor:"#C68F5E",padding:20,width:"70%",marginBottom:30,borderRadius:5}}>
     <View style={{gap:5}}>
-    <FontAwesome name="book" size={35} color="black" style={{marginBottom:10}}/>
-    <Text style={{fontFamily:"Poppins-Bold",fontSize:20}}>Log Input</Text>
-    <Text style={{fontFamily:"Poppins-Light", fontSize:15}}>Record Your Calorie Intake and Ouput</Text>
+    <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+    <Text style={{fontFamily:"Poppins-Bold",fontSize:20,color:"#C68F5E"}}>Log Input</Text>
+    <FontAwesome name="book" size={24} color="#C68F5E" style={{marginBottom:10}}/>
+
+    </View>
+    <Text style={{fontFamily:"Poppins-Medium", fontSize:15,color:"#C68F5E"}}>Record Your Calorie Intake and Ouput</Text>
 
 
     </View>

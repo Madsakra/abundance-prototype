@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
 
 type CustomLineChartProps = {
@@ -29,7 +29,7 @@ export default function CustomLineChart({
     const screen60 = screenWidth * 0.6
 
   return (
-    <>
+    <View>
     <Text style={[{color:graphColor},styles.chartHeader]}>{headerName} </Text>
 
     <Text style={[{color:graphColor},styles.subHeader]}>{trackingUnit}</Text>
@@ -41,7 +41,7 @@ export default function CustomLineChart({
          noOfSections={4}
          areaChart
          yAxisTextStyle={graphColor}
-
+         curved
      
          startFillColor={gradientStart}
         
@@ -57,7 +57,7 @@ export default function CustomLineChart({
          yAxisColor="lightgray"
          xAxisColor="lightgray"
     />
-  </>
+  </View>
   )
 }
 
