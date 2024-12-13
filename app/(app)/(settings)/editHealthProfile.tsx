@@ -1,27 +1,16 @@
-import { FontAwesome, FontAwesome5, FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
-import { FlashList } from "@shopify/flash-list";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import PressableTab from "~/components/PressableTab";
-import ProfilePill from "~/components/ProfilePill";
-import { toggleItemInList } from "~/util";
 
-export default function profile() {
+import { Entypo } from '@expo/vector-icons';
+import { FlashList } from '@shopify/flash-list';
+import { router } from 'expo-router';
+import { useState } from 'react';
+import { StyleSheet, Text } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import CustomModal from '~/components/CustomModal';
+import FunctionTiedButton from '~/components/FunctionTiedButton';
+import PressableTab from '~/components/PressableTab';
+import { toggleItemInList } from '~/util';
 
-
-
-  const profile = [
-    {text:"Mary Ann", svg:<FontAwesome name="user" size={20} color="#8797DA" />},
-    {text:"222412412412415", svg:<FontAwesome6 name="id-card" size={20} color="#8797DA" />},
-    {text:"18/09/1998", svg:<FontAwesome name="birthday-cake" size={20} color="#8797DA" />},
-    {text:"F", svg:<MaterialCommunityIcons name="gender-male-female" size={20} color="#8797DA" />},
-    {text:"maryAnn@gmail.com", svg:<MaterialCommunityIcons name="email" size={20} color="#8797DA" />},
-    {text:78, svg:<FontAwesome5 name="dumbbell" size={20} color="#8797DA" />},
-    {text:179, svg:<MaterialCommunityIcons name="human-male-height-variant" size={20} color="#8797DA" />},
-
-
-  ]
+export default function editHealthProfile() {
 
 
 const allDiets = ["Omnivore","Low Sugar","Low Fat",
@@ -48,56 +37,49 @@ const handleHealthCondi = (healthCondition: string) => {
 
 
 
+  const goBack = ()=>{
+    router.replace('/(app)/(settings)/profile')
+
+}
+
+
+        const [showModal,setShowModal] = useState(false);
+
+
+        const handleSave = ()=>{
+            setShowModal(false);
+            router.replace('/(app)/(settings)/profile')
+        }
+
+        const handleClose = ()=>{
+            setShowModal(false);
+        }
+
+
+
+
 
 
 
   return (
     <ScrollView>
-            <Image 
-            source={require("assets/profilePic.jpg")}
-            style={{width:"100%",height:300}}/>
-    
-    <View style={styles.headerRow}>
-      <Text style={{fontFamily:"Poppins-Bold",color:"#8797DA",fontSize:20}}>Personal information</Text>
 
-      <Link href="/editProfile">
-      <View style={{padding:12,backgroundColor:"#8797DA",borderRadius:5}}>
-      <FontAwesome name="pencil" size={20} color="white" />
-      </View>      
-      </Link>
+        <View style={{height:70,backgroundColor:"#8797DA",padding:20}}>
+            <Text style={{fontFamily:"Poppins-Bold",fontSize:18,color:"white"}}>Edit Health Profile</Text>
+        </View>
 
-
-    </View>
-
-    <View style={{padding:10,justifyContent:"center",height:"auto",marginTop:10,gap:10}}>
-
-    {profile.map((item,index)=>(
-      <ProfilePill text={item.text} svg={item.svg} key={index}/>
-    ))}
-
-
-    </View>
-
-
-    <View style={styles.headerRow}>
-      <Text style={{fontFamily:"Poppins-Bold",color:"#8797DA",fontSize:20}}>Health Profile</Text>
-
-      <Link href="/editHealthProfile">
-      <View style={{padding:12,backgroundColor:"#8797DA",borderRadius:5}}>
-      <FontAwesome name="pencil" size={20} color="white" />
-      </View>      
-      </Link>
-
-    </View>
+        <Text style={{fontFamily:"Poppins-Regular",fontSize:15,padding:20}}>
+        Grey options indicate unselected restrictions, while purple options show your active selections. Tap a purple option to unselect it.
+        </Text>
 
            {/* Dietary Restrictions Section */}
-           <View style={{ height: 'auto' }}>
+           <View style={{ height: 'auto',marginTop:30 }}>
                 <Text style={styles.listHeader}>Dietary Restrictions</Text>
                 <FlashList
                     data={allDiets}
                     renderItem={({ item }) => (
                         <PressableTab
-                            editable={false} // Allow interaction
+                            editable={true} // Allow interaction
                             tabBoxStyle={styles.tabBox}
                             tabTextStyle={styles.tabTextStyle}
                             tabValue={item}
@@ -119,7 +101,7 @@ const handleHealthCondi = (healthCondition: string) => {
                     data={healthConditions}
                     renderItem={({ item }) => (
                         <PressableTab
-                            editable={false} // Allow interaction
+                            editable={true} // Allow interaction
                             tabBoxStyle={styles.tabBox}
                             tabTextStyle={styles.tabTextStyle}
                             tabValue={item}
@@ -133,13 +115,38 @@ const handleHealthCondi = (healthCondition: string) => {
                     contentContainerStyle={styles.listContainer}
                 />
             </View>
+                <View style={{flexDirection:'row',justifyContent:"space-between",padding:10,marginVertical:25}}>
+                
+                <FunctionTiedButton onPress={goBack} 
+                  title="Go Back" 
+                  buttonStyle={[styles.buttonContainer,{backgroundColor:"#969696",width:"35%"}]}
+                  textStyle={styles.textStyle}/>
+                
+                <FunctionTiedButton onPress={()=>setShowModal(true)} 
+                  title="Save Information" 
+                  buttonStyle={[styles.buttonContainer,{width:"60%",backgroundColor:"#8797DA"}]}
+                  textStyle={styles.textStyle}/>
+                </View>
+
+            {showModal && 
+                <CustomModal 
+                showModal={showModal} 
+                handleSave={handleSave} 
+                handleClose={handleClose}
+                themeColor="#8797DA"
+                successMessage="Edit Saved"
+                message='Save Edit?'
+                icon={<Entypo name="save" size={50} color="#8797DA" />}/>}
+
+
+
+
 
 
 
     </ScrollView>
   )
 }
-
 
 const styles = StyleSheet.create({
   headerRow:{
@@ -180,5 +187,19 @@ const styles = StyleSheet.create({
       fontFamily:'Poppins-SemiBold',
       fontSize:20
   },
+  buttonContainer:{
+    marginTop:5,
+    padding:15,
+    borderRadius:10,
+  
+  },
+
+  textStyle:{
+    textAlign:"center",
+    fontFamily:"Poppins-Bold",
+    color:"white",
+    fontSize:15,
+  }
+
 
 })
