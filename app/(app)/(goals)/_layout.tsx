@@ -10,7 +10,9 @@ export default function Layout() {
   
       >
       
-      <Stack.Screen name="viewGoals" options={{}} />
+      <Stack.Screen name="viewGoals"/>
+      <Stack.Screen name="editGoals"/>
+
     </Stack>
   );
 }

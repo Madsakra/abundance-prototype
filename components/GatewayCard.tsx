@@ -21,10 +21,10 @@ const renderSvgIcon = (svg: string, color: string) => {
       return <Ionicons name="cube" size={100} color={color} />;
 
     case 'profile':
-      <FontAwesome name="user" size={100} color={color} />;
+      return <FontAwesome name="user" size={100} color={color} />;
 
     case 'membership':
-      <FontAwesome name="credit-card-alt" size={100} color={color} />
+      return <FontAwesome name="credit-card-alt" size={100} color={color} />
       
     default:
       return <Text style={{ color }}>Unsupported Icon</Text>;

@@ -6,6 +6,7 @@ import * as DB from '../../../../sqlDatabase'
 import RecordsTable from "~/UI/Dashboard/RecordsTable";
 import { Link } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import TopDateSelector from "~/components/TopDateSelector";
 
 
 export default function caloriesGraph() {
@@ -148,7 +149,10 @@ export default function caloriesGraph() {
 
 
   return (
-  <ScrollView style={{flex:1,padding:20}}>
+
+    <View style={{flex:1}}>
+    <TopDateSelector themeColor="#C68F5E"/>
+  <ScrollView style={{padding:20}}>
 
     <View style={{width:width90,height:height50,borderWidth:1,padding:20, borderColor:"#C68F5E",borderRadius:10,marginBottom:30}}>
     <CustomLineChart 
@@ -202,6 +206,7 @@ export default function caloriesGraph() {
 
 
   </ScrollView>
+  </View>
 
   )
 }

@@ -2,9 +2,12 @@ import { View } from "react-native";
 import GoalsCard from "~/components/GoalsCard";
 
 
+type GoalsTrackingProps = {
+  color?:string;
+  
+}
 
-
-export default function GoalsTracking() {
+export default function GoalsTracking({color}:GoalsTrackingProps) {
 
 
 
@@ -13,7 +16,7 @@ export default function GoalsTracking() {
     const firstGoalProgress = {
       goalText:"<2300 kcal / day",
       goalValue:2300,
-      currentProgress:2300,
+      currentProgress:1200,
       goalCategory:"calorie"
     }
   
@@ -29,13 +32,13 @@ export default function GoalsTracking() {
     <View style={{marginBottom:"5%"}}>
         <GoalsCard
         goals={firstGoalProgress}
-        color="#00ACAC"
+        color={color?color:"#00ACAC"}
         
         />
 
         <GoalsCard
         goals={secondGoalProgress}
-        color="#00ACAC"
+        color={color?color:"#00ACAC"}
         />
 
 

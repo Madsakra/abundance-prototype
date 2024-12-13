@@ -6,7 +6,7 @@ import GatewayCard from "~/components/GatewayCard";
 
 const gateWayList = [
   {header:"Calories",link:"/calories/caloriesGraph" as RelativePathString,svg:"fire",color:"#C68F5E"},
-  {header:"Glucose",link:"/glucose/glucoseLogging" as RelativePathString,svg:'cube',color:"#DB8189"}
+  {header:"Glucose",link:"/glucose/glucoseGraph" as RelativePathString,svg:'cube',color:"#DB8189"}
 ];
 
 

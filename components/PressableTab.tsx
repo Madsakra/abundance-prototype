@@ -10,6 +10,7 @@ type PressableTabProps<T> = {
   editable: boolean;
   handleInfo?: (diet: T) => void;
   SvgIcon?: React.FC<SvgProps>; // Optional SVG icon
+  isPressed?: boolean; 
 };
 
 
@@ -20,6 +21,7 @@ export default function PressableTab<T>({
   editable,
   handleInfo,
   SvgIcon,
+  isPressed
 }: PressableTabProps<T>) {
 
   const [pressed,setPressed] = useState(false);
@@ -42,8 +44,8 @@ export default function PressableTab<T>({
 
     return editable ? (
       <TouchableOpacity
-        style={pressed ? pressedStyle : unpressedStyle}
-        onPress={handlePress}
+      style={isPressed ? pressedStyle : unpressedStyle}        
+      onPress={handlePress}
       >
         {SvgIcon && <SvgIcon />}
         <Text style={tabTextStyle}>
@@ -51,7 +53,7 @@ export default function PressableTab<T>({
         </Text>
       </TouchableOpacity>
     ) : (
-      <View style={pressedStyle}>
+      <View style={isPressed?pressedStyle:unpressedStyle}>
         {SvgIcon && <SvgIcon />}
         <Text style={tabTextStyle}>{displayText}</Text>
       </View>

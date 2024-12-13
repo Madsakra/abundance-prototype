@@ -85,7 +85,7 @@ const DrawerLayout = () => (
   
   <Drawer 
   drawerContent={CustomDrawerContent}
-
+  
   screenOptions={{
     drawerActiveBackgroundColor:"#AEE8E8",
     drawerActiveTintColor:"#00ACAC",
@@ -97,8 +97,18 @@ const DrawerLayout = () => (
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0,
     shadowRadius: 0,
-
+    
     },
+    
+    headerRight:(()=> 
+    <Link href={"/(settings)/profile"} style={{marginRight:10}}>
+    <Image 
+    source={require("assets/profilePic.jpg")}
+    style={{width:50,height:50,borderRadius:50}}/>
+    </Link>
+    ),
+
+    
     headerTintColor: "#00ACAC",
     headerTitleStyle: {
       fontFamily:"Poppins-Light",
@@ -127,15 +137,13 @@ const DrawerLayout = () => (
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
         // when user clicks on navigation, send them back to gateway
-        e.preventDefault();
-        router.push("/(app)/(caloriesAndGlucose)/gateway")
+        router.replace("/(app)/(caloriesAndGlucose)/gateway")
       },
     })}
      
      options={{
       headerTitleAlign:'center',
       headerTitle: 'Calories and Glucose',
-    
       drawerLabel: 'Calories and Glucose',
       drawerIcon: ({ size, color }) => <FontAwesome name="book" size={24} color={color} />,
       
@@ -147,7 +155,6 @@ const DrawerLayout = () => (
      name="(goals)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(goals)/viewGoals")
       },
@@ -165,7 +172,6 @@ const DrawerLayout = () => (
      name="(settings)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         // when user clicks on navigation, send them back to 
         router.replace("/(app)/(settings)/gateway");
       },
@@ -183,7 +189,6 @@ const DrawerLayout = () => (
      name="(dataCorrelation)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         router.replace("/(app)/(dataCorrelation)/viewDataCorrelation");
         // when user clicks on navigation, send them back to gateway
       },
@@ -202,7 +207,6 @@ const DrawerLayout = () => (
      name="(reminder)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(reminder)/viewReminder")
       },
@@ -222,7 +226,6 @@ const DrawerLayout = () => (
      name="(appReview)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(appReview)/viewAppReviews")
       },
@@ -240,7 +243,6 @@ const DrawerLayout = () => (
      name="(nutritionistFeedback)"
      listeners={({ navigation }) => ({
       drawerItemPress: (e) => {
-        e.preventDefault();
         // when user clicks on navigation, send them back to gateway
         router.replace("/(app)/(nutritionistFeedback)/allFeedback")
       },

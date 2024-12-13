@@ -1,8 +1,11 @@
+import { FontAwesome } from '@expo/vector-icons';
+import { Link } from 'expo-router';
 import React from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomLineChart from '~/components/CustomLineChart';
 import GlucoseDataRow from '~/components/GlucoseDataRow';
+import TopDateSelector from '~/components/TopDateSelector';
 
 export default function glucoseGraph() {
 
@@ -60,8 +63,10 @@ export default function glucoseGraph() {
 
 
   return (
-     <ScrollView style={{flex:1,padding:20}}>
-   
+    <View style={{flex:1}}>
+    <TopDateSelector themeColor="#DB8189"/>
+        <ScrollView style={{padding:20}}>
+        
        <View style={{width:width90,height:height50,borderWidth:1,padding:20, borderColor:"#DB8189",borderRadius:10,marginBottom:30}}>
          <CustomLineChart 
           headerName="Glucose Levels"
@@ -74,7 +79,20 @@ export default function glucoseGraph() {
           />
        </View>
 
+        {/*CONVERT TO COMPONENT LATER*/}
+       <Link href="/glucose/glucoseLogging" 
+        style={{borderWidth:2,borderColor:"#DB8189",padding:20,width:"70%",marginBottom:30,borderRadius:5}}>
+            <View style={{gap:5}}>
+            <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+            <Text style={{fontFamily:"Poppins-Bold",fontSize:20,color:"#DB8189"}}>Log Input</Text>
+            <FontAwesome name="book" size={24} color="#DB8189" style={{marginBottom:10}}/>
 
+            </View>
+            <Text style={{fontFamily:"Poppins-Medium", fontSize:15,color:"#DB8189"}}>Log your glucose levels now to track your insulin.</Text>
+            </View>
+        </Link>
+    
+        {/*---------------------------*/}
 
         <View style={{width:width90,height:'auto',borderWidth:1,borderColor:"#DB8189",padding:10,borderRadius:5,marginBottom:50}}>
 
@@ -109,6 +127,7 @@ export default function glucoseGraph() {
 
 
    </ScrollView>
+   </View>
   )
 }
 
