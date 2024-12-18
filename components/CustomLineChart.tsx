@@ -35,7 +35,7 @@ export default function CustomLineChart({
     <Text style={[{color:graphColor},styles.subHeader]}>{trackingUnit}</Text>
 
     <LineChart data={data}
-         thickness={6}
+         thickness={2}
          color={graphColor}
          isAnimated
          noOfSections={4}

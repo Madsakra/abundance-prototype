@@ -20,26 +20,39 @@ type Goal = {
 };
 
 
-const allGoals:Goal[] = [
-  {id:1,name:"< 1800 kcal / day",value:1800,SvgIcon:FireIcon},
-  {id:2,name:"< 2000 kcal / day",value:2000,SvgIcon:FireIcon},
-  {id:3,name:"< 2200 kcal / day",value:2200,SvgIcon:FireIcon},
-  {id:4,name:"< 5.0 mmo/L before Food",value:5.0,SvgIcon:CubeSvg},
-  {id:5,name:"< 6.0 mmo/L before Food",value:6.0,SvgIcon:CubeSvg},
-  {id:6,name:"< 7.0 mmo/L after Food",value:7.0,SvgIcon:CubeSvg},
 
-
-
-]
 
 export default function goalSetting() {
+
+
+
+  const allGoals:Goal[] = [
+    {id:1,name:"< 1800 kcal / day",value:1800,SvgIcon:FireIcon},
+    {id:2,name:"< 2000 kcal / day",value:2000,SvgIcon:FireIcon},
+    {id:3,name:"< 2300 kcal / day",value:2200,SvgIcon:FireIcon},
+    {id:4,name:"< 5.0 mmo/L before Food",value:5.0,SvgIcon:CubeSvg},
+    {id:5,name:"< 6.0 mmo/L before Food",value:6.0,SvgIcon:CubeSvg},
+    {id:6,name:"< 7.0 mmo/L after Food",value:7.0,SvgIcon:CubeSvg},
+  ]
+  
+
 
   const [profileGoals,setProfileGoals] = useState<Goal[]>([])
   const [loading,setLoading] = useState(false)
 
   const handleGoals = (goal: { id: number; name: string; value: number }) => {
-    toggleItemInList(goal,setProfileGoals);
+    const exists = profileGoals.some((item) => item.id === goal.id);
+  
+    if (exists) {
+      // Remove the goal if it exists
+      setProfileGoals((prev) => prev.filter((item) => item.id !== goal.id));
+    } else {
+      // Add the goal if it doesn't exist
+      setProfileGoals((prev) => [...prev, goal]);
+    }
+  
   };
+
 
   const nextSection = ()=>{
     setLoading(true);
@@ -73,12 +86,13 @@ export default function goalSetting() {
         data={allGoals}
         renderItem={({ item }) => (
           <PressableTab
-            editable={true}
-            tabBoxStyle={styles.tabBox}
-            handleInfo={handleGoals}
-            tabTextStyle={styles.tabTextStyle}
-            tabValue={item} // This now matches the expected type
-            SvgIcon={item.SvgIcon}
+                 editable={true}
+                        tabBoxStyle={styles.tabBox}
+                        handleInfo={handleGoals}
+                        tabTextStyle={styles.tabTextStyle}
+                        tabValue={item} // This now matches the expected type
+                        SvgIcon={item.SvgIcon}
+                        isPressed={profileGoals.some((goal) => goal.id === item.id)} // Check if the goal is selected
           />
         )}
         keyExtractor={(item) => item.id.toString()}

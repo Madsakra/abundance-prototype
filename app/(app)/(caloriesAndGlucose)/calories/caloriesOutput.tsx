@@ -40,8 +40,8 @@ export default function caloriesOutput() {
 
   
 
-    const redirectToAddMeals = ()=>{
-      router.replace('/(app)/(caloriesAndGlucose)/calories/addActivity')
+    const redirectToAddActivity = ()=>{
+      router.push('/(app)/(caloriesAndGlucose)/calories/addActivity')
     }
 
     const redirectNext = ()=>{
@@ -72,7 +72,7 @@ export default function caloriesOutput() {
         {/* TOP BUTTON*/}
         <View style={{flex:1,marginVertical:"8%"}}>
 
-          <RecordTopButton buttonText="Add Activity" bgColor='#C68F5E' redirect={redirectToAddMeals}/>
+          <RecordTopButton buttonText="Add Activity" bgColor='#C68F5E' redirect={redirectToAddActivity}/>
           {/*SUB COMPONENT HERE UNDER UI FOLDER*/}
           <RecordsTable 
           tableHeader="Calories Output"

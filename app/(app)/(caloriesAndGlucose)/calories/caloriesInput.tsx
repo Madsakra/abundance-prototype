@@ -42,11 +42,11 @@ export default function caloriesLogging() {
   
 
     const redirectToAddMeals = ()=>{
-      router.replace('/calories/addMeals')
+      router.push('/calories/addMeals')
     }
 
     const redirectToLogOutput = ()=>{
-      router.replace('/calories/caloriesOutput')
+      router.push('/calories/caloriesOutput')
     }
     
   useEffect(()=>{

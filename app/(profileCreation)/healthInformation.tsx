@@ -60,6 +60,7 @@ const handleHealthCondi = (healthCondition: string) => {
         renderItem={({ item }) =>         
         <PressableTab
         editable={true} 
+        isPressed={profileDiet.includes(item)} // Highlight if selected
         tabBoxStyle={styles.tabBox}
         handleInfo={handleDiet}
         tabTextStyle={styles.tabTextStyle}

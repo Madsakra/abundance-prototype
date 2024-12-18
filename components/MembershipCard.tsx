@@ -3,16 +3,25 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import { SvgProps } from 'react-native-svg';
 import membership from '~/app/(app)/(settings)/membership';
 
-type MembershipCardProps = {
+
+type Membership = {
     tier:string;
     price:string;
-    externalSvg?:React.ReactNode;
+    externalSvg?:React.ReactNode | undefined;
     
+}
+
+type MembershipCardProps = {
+        tier:string;
+        price:string;
+        externalSvg?:React.ReactNode;
+    handleMembershipChange:(membershipTier:Membership)=>void;
+    currentMembershipTier:Membership
 }
 
 
 
-export default function MembershipCard({tier,price,externalSvg}:MembershipCardProps) {
+export default function MembershipCard({tier,price,externalSvg,handleMembershipChange,currentMembershipTier}:MembershipCardProps) {
   return (
       <View style={styles.container}>
 
@@ -20,8 +29,14 @@ export default function MembershipCard({tier,price,externalSvg}:MembershipCardPr
         <Text style={{fontFamily:"Poppins-Bold",fontSize:18}}>Membership Tier</Text>
         <Text style={{fontFamily:"Poppins-Bold",fontSize:24}}>{tier}</Text>
         <Text style={{fontFamily:"Poppins-Regular",fontSize:17}}>{price}</Text>
-        <Pressable style={styles.buttonContainer} onPress={()=>alert("Redirect to external API (Stripe)")}>
+        <Pressable style={[styles.buttonContainer,currentMembershipTier.tier===tier?{backgroundColor:"#6E6E6E"}:{backgroundColor:"#00ACAC"}]} onPress={()=>handleMembershipChange({tier,price,externalSvg})}>
+          {currentMembershipTier.tier === tier? 
+          
+          <Text style={styles.buttonContainerText}>Current Plan</Text>:
           <Text style={styles.buttonContainerText}>Change Plan</Text>
+
+
+        }
         </Pressable>
         </View>
 

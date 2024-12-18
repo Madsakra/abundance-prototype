@@ -52,6 +52,8 @@ export default function PressableTab<T>({
           {displayText}
         </Text>
       </TouchableOpacity>
+
+      
     ) : (
       <View style={isPressed?pressedStyle:unpressedStyle}>
         {SvgIcon && <SvgIcon />}

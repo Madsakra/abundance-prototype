@@ -34,7 +34,16 @@ export default function editGoals() {
       const [loading,setLoading] = useState(false)
     
       const handleGoals = (goal: { id: number; name: string; value: number }) => {
-        toggleItemInList(goal,setProfileGoals);
+        const exists = profileGoals.some((item) => item.id === goal.id);
+  
+        if (exists) {
+          // Remove the goal if it exists
+          setProfileGoals((prev) => prev.filter((item) => item.id !== goal.id));
+        } else {
+          // Add the goal if it doesn't exist
+          setProfileGoals((prev) => [...prev, goal]);
+        }
+      
       };
     
      const [showModal,setShowModal] = useState(false);

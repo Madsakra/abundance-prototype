@@ -26,11 +26,12 @@ export default function KeyMetrics({activeTab,setActiveTab}:KeyMetricsProps) {
       return (
           <View
           style={[{
-              width: 20,
-              height: 20,
+              width: 15,
+              height: 15,
               backgroundColor: 'white',
               borderWidth: 1,
               borderRadius: 10,
+              
              
           }, activeTab==='calories'? { borderColor: '#C68F5E'}: { borderColor: '#DB8189',}]}
           />

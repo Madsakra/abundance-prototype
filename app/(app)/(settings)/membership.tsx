@@ -1,8 +1,15 @@
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
-import React from 'react'
+import React, { useState } from 'react'
 import { Pressable, ScrollView, Text } from 'react-native'
 import { View } from 'react-native'
 import MembershipCard from '~/components/MembershipCard'
+
+type MembershipCardProps = {
+    tier:string;
+    price:string;
+    externalSvg?:React.ReactNode;
+    
+}
 
 export default function membership() {
 
@@ -15,6 +22,17 @@ export default function membership() {
   ]
 
 
+  const [currentMembershipTier,setCurrentMembershipTier] = useState(membershipTiers[0]);
+
+  const handleMembershipChange = (memberTier:MembershipCardProps)=>{
+    if (currentMembershipTier.tier !== memberTier.tier)
+    {
+      alert("Direct to external Stripe API")
+      setCurrentMembershipTier(memberTier);
+    }
+  }
+
+
   return (
     <ScrollView style={{padding:10,marginVertical:10}}>
 
@@ -24,7 +42,8 @@ export default function membership() {
         tier={item.tier}
         price={item.price}
         externalSvg={item?.svg}
-
+        handleMembershipChange={handleMembershipChange}
+        currentMembershipTier={currentMembershipTier}
         />
       ))}
 
