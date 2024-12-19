@@ -5,6 +5,7 @@ import FunctionTiedButton from "~/components/FunctionTiedButton"
 export default function profileCreated() {
 
     const nextSection = ()=>{
+        router.dismissAll();
         router.replace('/')
     }
 

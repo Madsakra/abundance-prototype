@@ -11,31 +11,22 @@ export default function bmrInformation() {
     const [weight,setWeight] = useState<number|null>(null);
 
 
-    const nextSection = ()=>{
-        // MAKE CALL TO SQL LITE
-        // SAVE THE IMAGE,NAME, GENDER AND DOB
-    
-        // IF SUCCEED, GO TO NEXT PAGE
-    
-        try{
-          
-          // IMAGE NOT TAKEN INTO CONSIDERATION FOR NOW --- SETTLE LATER
-          // if (image && (name.trim()!=="") && (gender.trim()!=="") && birthDate)
-          // {
-            
-          // }
-    
-          // else{
-          //   alert("Please Fill Up the form correctly!")
-          // }
-          router.replace("/(profileCreation)/healthInformation")
-    
+    const nextSection = () => {
+      try {
+        // Check if height and weight are valid (not null and not 0)
+        if (height && weight && height > 0 && weight > 0) {
+          // Proceed to the next section
+          // MAKE CALL TO SQL LITE TO SAVE DATA
+          router.replace("/(profileCreation)/healthInformation");
+        } else {
+          // Alert user if height or weight is invalid
+          alert("Please fill in both height and weight correctly! Values must be greater than 0.");
         }
-        catch(err)
-        {
-    
-        }
+      } catch (err) {
+        console.error("Error saving data or navigating:", err);
+        alert("Something went wrong. Please try again!");
       }
+    };
      
 
 

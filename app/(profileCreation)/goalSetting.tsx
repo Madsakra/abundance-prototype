@@ -55,15 +55,36 @@ export default function goalSetting() {
 
 
   const nextSection = ()=>{
-    setLoading(true);
-    // TO COMPILE EVERYTHING FROM SQL LITE AND SEND TO DB
-    // AFTER THAT REDIRECT USER TO THE SUCCESS PAGE
-
-    setTimeout(() => {
-      setLoading(false);
-      router.replace('/(profileCreation)/profileCreated')
     
-    },2000);
+    
+      try{
+
+
+        if (profileGoals.length === 0)
+        {
+          alert("You have yet to select at least 1 goal")
+        }
+
+        else{
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            router.replace('/(profileCreation)/profileCreated')
+          
+          },2000);
+        }
+
+
+
+      }
+      catch (err){
+        console.log(err)
+      }
+    
+
+
+
+
   }
 
 

@@ -1,7 +1,6 @@
-import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useEffect, useState } from 'react';
-import CustomTextInput from '~/components/CustomTextInput';
 import { FlashList } from '@shopify/flash-list';
 import RecordCard from '~/components/RecordCard';
 import { RecordCardProps } from '~/app-env';
@@ -30,28 +29,26 @@ export default function addMeals() {
   const [loading,setLoading] = useState(true);
   const [filteredRecords, setFilteredRecords] = useState(records);
 
-  const handleFilter = (text: string) => {
-    setFoodName(text);
+  const queryDB = async () => {
+    const queryRecord = await DB.db.getAllAsync('SELECT * FROM FoodOptions');
+    let tempContainer: RecordCardProps[] = [];
+    for (const record of queryRecord) {
+      const typedArticle = record as RecordCardProps;
+      tempContainer.push(typedArticle);
+    }
+    setRecords(tempContainer);
+    // setFilteredRecords(tempContainer); // Show all records initially
+    setLoading(false);
+  };
+
+  const handleSearch = () => {
+    // Filter records based on the search input
     const filtered = records.filter((record) =>
-      record.foodName.toLowerCase().startsWith(text.toLowerCase())
+      record.foodName.toLowerCase().startsWith(foodName.toLowerCase())
     );
     setFilteredRecords(filtered);
   };
 
-
-  const queryDB = async ()=>{
-      const queryRecord = await DB.db.getAllAsync('SELECT * FROM FoodOptions');
-      let tempContainer:RecordCardProps[] = [];
-      for (const record of queryRecord)
-      {
-          
-          const typedArticle = record as RecordCardProps;
-          tempContainer.push(typedArticle);
-      }
-
-      setRecords(tempContainer);
-      setLoading(false);
-  }
 
   const customAddButton = (foodID:number)=>{
     const stringifiedID = String(foodID)
@@ -100,14 +97,18 @@ export default function addMeals() {
               </View>
              
 
-         
+              <View style={{ flexDirection: 'row',marginTop:15}}>
+          <TextInput
+            style={[styles.inputContainerStyle, { flex: 1 }]}
+            onChangeText={setFoodName}
+            value={foodName}
+            placeholder="Search For Food Name"
+          />
+          <Pressable onPress={handleSearch} style={styles.searchButton}>
+          <AntDesign name="search1" size={24} color="#C68F5E" />
+          </Pressable>
+        </View>
 
-              <TextInput
-              style={styles.inputContainerStyle}
-              onChangeText={handleFilter}
-              value={foodName}
-              placeholder="Search For Food Name"
-              />
 
             </View>
 
@@ -145,11 +146,11 @@ export default function addMeals() {
 
 const styles = StyleSheet.create({
   inputContainerStyle:{
-    width:"100%",
+   
     padding:20,
     borderRadius:5,
     backgroundColor:"white",
-    marginTop:20
+
   },
 
   bottomButton:{
@@ -165,5 +166,19 @@ const styles = StyleSheet.create({
     textAlign:"center",
     fontFamily:"Poppins-Bold",
     fontSize:20,
-  }
+  },
+
+  searchButton: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 5,
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  searchButtonText: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 15,
+    color: '#C68F5E',
+  },
 })

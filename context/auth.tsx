@@ -47,6 +47,8 @@ export function AuthProvider({children}:React.PropsWithChildren)
             if (!user.profileID || user.profileID.trim() === "") 
             {
                 router.replace("/(profileCreation)/simpleInformation");
+                alert("Hi, we see that this is your first time here! Let's start by creating a new profile.")
+
             }
 
             else{

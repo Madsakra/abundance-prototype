@@ -1,7 +1,5 @@
 import { View,StyleSheet, Text, Pressable, Image } from "react-native";
 import { useAuth } from "~/context/auth";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, router } from "expo-router";
 import { TextInput } from "react-native-gesture-handler";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -39,10 +37,18 @@ export default function Home() {
     try{
 
     // use email and password to make api call 
+      if (email.trim() === "" || password.trim() === "")
+      {
+         alert("You have missed out on either your email and password!")
+      }
+
+      else{
+         signIn(fakeUserObject);
+
+      }
 
      // make API call to the server
     // when server responds, set the context to the user object
-    signIn(fakeUserObject);
     
     
 

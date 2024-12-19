@@ -1,5 +1,5 @@
 import { FontAwesome6 } from "@expo/vector-icons";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 type ImageSelectorProps = {
     pickImage: ()=>void
@@ -9,11 +9,10 @@ type ImageSelectorProps = {
 
 export default function ImageSelector({pickImage}:ImageSelectorProps) {
   return (
-    <Pressable  
-    style={styles.imagePicker}
-    onPress={pickImage}>
+    <View  style={styles.imagePicker}>
+   
     <FontAwesome6 name="images"  size={20} color="black"   />
-    </Pressable>
+    </View>
   )
 }
 

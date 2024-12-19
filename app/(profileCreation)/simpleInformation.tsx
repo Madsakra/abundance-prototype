@@ -53,15 +53,15 @@ export default function simpleInformation() {
     try{
       
       // IMAGE NOT TAKEN INTO CONSIDERATION FOR NOW --- SETTLE LATER
-      // if (image && (name.trim()!=="") && (gender.trim()!=="") && birthDate)
-      // {
+      if (image && (name?.trim()!=="") && (gender.trim()!=="") && birthDate)
+      {
+        router.replace("/(profileCreation)/bmrInformation")
         
-      // }
+      }
 
-      // else{
-      //   alert("Please Fill Up the form correctly!")
-      // }
-      router.replace("/(profileCreation)/bmrInformation")
+      else{
+        alert("Please Fill Up the form correctly!")
+      }
 
     }
     catch(err)
@@ -75,15 +75,16 @@ export default function simpleInformation() {
   return (
     <View style={styles.pageContainer}>
         <Text style={styles.header}>Profile Creation</Text>
-        <Text style={{fontFamily:"Poppins-Regular",fontSize:20,textAlign:"center"}}>A few more steps to go...</Text>
+        <Text style={{fontFamily:"Poppins-Regular",fontSize:15,textAlign:"center"}}>A few more steps to go...</Text>
         
 
         {/* Image selector*/}
-        <View style={image?styles.imageContainer:[styles.imageContainer,{backgroundColor:'gray'}]}>
+        <Pressable
+        onPress={pickImage}  
+        style={image?styles.imageContainer:[styles.imageContainer,{backgroundColor:'gray'}]}>
         {image && <Image source={{ uri: image }} style={{flex:1, borderRadius:50}} />}
-
         <ImageSelector pickImage={pickImage}/>
-        </View>
+        </Pressable>
         {/*----------------*/}
 
 
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
 
   header:{
     fontFamily:"Poppins-Bold",
-    fontSize:40,
+    fontSize:30,
     textAlign:"center",
     marginTop:15
   },
