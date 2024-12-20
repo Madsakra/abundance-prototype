@@ -57,7 +57,23 @@ export default function foodInformation() {
 
   const addFood = ()=>{
     // CALL API HERE TO ADD ON FOOD TO THE BACKEND
-    router.replace("/(app)/(caloriesAndGlucose)/calories/caloriesInput");
+    try{
+
+      if (!portion || portion <0)
+      {
+        alert("Please enter the portion size to your meal!")
+      }
+
+      else{
+        router.replace("/(app)/(caloriesAndGlucose)/calories/caloriesInput");
+      }
+
+    }
+
+    catch(err)
+    {
+      console.log(err)
+    }
   }
 
   const goBack = ()=>{

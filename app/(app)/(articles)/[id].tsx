@@ -1,7 +1,8 @@
-import { useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import { View, Text, StyleSheet, Image, ImageSourcePropType,ScrollView, Dimensions } from 'react-native';
 import { db } from '~/sqlDatabase';
 import { useEffect, useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 type Article= {
     id:number;
@@ -87,6 +88,9 @@ useEffect(()=>{
        
 
           <ScrollView>
+            <Link href="/" style={{marginBottom:10}}>
+            <AntDesign name="left" size={24} color="black" />
+            </Link>
           <Image source={image} style={styles.image} />
             <Text style={{fontFamily:"Poppins-Medium",fontSize:24}}>{article?.name}</Text>
 
