@@ -6,7 +6,7 @@ import { SvgProps } from 'react-native-svg'; // We need to satisfy this prop typ
 
 // Wrapper function for Fontisto icons to match SvgProps
 const FireIcon: React.FC<SvgProps> = (props) => {
-  return <Fontisto name="fire" size={ 24} color="white"/>;
+  return <Fontisto name="fire" size={15} color="white"/>;
 };
 
 export default FireIcon;

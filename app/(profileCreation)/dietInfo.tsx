@@ -1,64 +1,48 @@
-import { Link, router } from "expo-router";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import Entypo from '@expo/vector-icons/Entypo';
-import PressableTab from "~/components/PressableTab";
-import { FlashList } from "@shopify/flash-list";
-import { useEffect, useState } from "react";
-import FunctionTiedButton from "~/components/FunctionTiedButton";
-import { toggleItemInList } from "~/util";
+import { Entypo } from '@expo/vector-icons';
+import { FlashList } from '@shopify/flash-list';
+import { Link, router } from 'expo-router';
+import React, { useState } from 'react'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import FunctionTiedButton from '~/components/FunctionTiedButton';
+import PressableTab from '~/components/PressableTab';
+import { toggleItemInList } from '~/util';
 
-export default function healthInformation() {
+export default function dietInfo() {
 
- const allDiets = ["Omnivore","Low Sugar","Low Fat",
-    "Vegetarian","Ketosis","Pescatarian","Gluten-Free",
-    "Dairy-Free","Nut-Free","Soy-Free","Halal","Kosher","Paleo"];
-
-
-
- const healthConditions = ["Type 2 Diabets","High Blood Pressure",
-    "Type 1 Diabetes","High Cholesterol","Low Glucose Levels","Low Blood Pressure"];
-
- const [profileDiet,setProfileDiet] = useState<string[]>([]);
-
- const [profileHealthCondi,setProfileHealthCondi] = useState<string[]>([]);
-
- const handleDiet = (diet: string) => {
-  toggleItemInList(diet,setProfileDiet)
-};
-
-
-const handleHealthCondi = (healthCondition: string) => {
-  toggleItemInList(healthCondition,setProfileHealthCondi)
-};
-
-
-
-
+    const allDiets = ["Omnivore","Low Sugar","Low Fat",
+        "Vegetarian","Ketosis","Pescatarian","Gluten-Free",
+        "Dairy-Free","Nut-Free","Soy-Free","Halal","Kosher","Paleo"];
+    
+    const [profileDiet,setProfileDiet] = useState<string[]>([]);
+    
+    const handleDiet = (diet: string) => {
+    toggleItemInList(diet,setProfileDiet)
+    };
 
   const nextSection = ()=>{
     // SEND DATA TO SQL LITE FIRST
-
+    
     // NAVIGATE TO GOAL SETTING PAGE
-    router.replace("/(profileCreation)/dietInfo")
+    router.replace("/(profileCreation)/goalSetting")
   }
-
 
   return (
     <ScrollView>
         
-        <Link href="/(profileCreation)/bmrInformation" style={{marginHorizontal:20,marginVertical:25}}>
+        <Link href="/(profileCreation)/healthInformation" style={{marginHorizontal:20,marginVertical:25}}>
             <Entypo name="chevron-thin-left" size={24} color="black" />
         </Link>
 
-        <Text style={styles.header}>Health Conditions</Text>
-        <Text style={styles.subHeader}>Select your health condition below so that we can help you navigate from health risks</Text>
-        <Image source={require("assets/health_condi.jpg")} style={{width:100,height:100,alignSelf:"center", marginBottom:20}}/>
+        <Text style={styles.header}>Dietary Restrictions</Text>
+        <Text style={styles.subHeader}>Let us know your dietary restrictions so that our nutritionist can prepare meal plans appropriately</Text>
+        <Image source={require("assets/diet_restric.jpg")} style={{width:100,height:100,alignSelf:"center", marginVertical:20}}/>
 
-        {/*Health Conditions restriction section*/}
+        {/*Dietary restriction section*/}
         <View style={styles.listBox}>
       
         <FlashList
-        data={healthConditions}        
+        data={allDiets}  
+              
         renderItem={({ item }) =>         
         <PressableTab
         editable={true} 
@@ -74,7 +58,7 @@ const handleHealthCondi = (healthCondition: string) => {
         </View>
         
 
-    
+
 
         <FunctionTiedButton
             buttonStyle={styles.buttonBox}
@@ -91,7 +75,7 @@ const handleHealthCondi = (healthCondition: string) => {
 const styles = StyleSheet.create({
     header:{
         fontFamily:"Poppins-Bold",
-        fontSize:30, 
+        fontSize:28, 
         textAlign:"center",
         
 
@@ -162,13 +146,14 @@ const styles = StyleSheet.create({
       padding:12,
       textAlign:"center"
      },
-
+     
      listBox:{
-      height:250,
-      borderWidth:1,
-      marginHorizontal:20,
-      borderRadius:10,
-      marginBottom:10,borderColor:"#D2D2D2"
-     }
+        height:250,
+        borderWidth:1,
+        marginHorizontal:20,
+        borderRadius:10,
+        marginBottom:10,
+        borderColor:"#D2D2D2"
+       }
     
 })

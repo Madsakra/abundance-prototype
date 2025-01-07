@@ -1,6 +1,6 @@
 import { Entypo } from "@expo/vector-icons"
 import { Link, router } from "expo-router"
-import { StyleSheet, Text, View } from "react-native"
+import { Image, StyleSheet, Text, View } from "react-native"
 import { useEffect, useState } from "react";
 import { SvgProps } from "react-native-svg";
 import { FlashList } from "@shopify/flash-list";
@@ -92,17 +92,17 @@ export default function goalSetting() {
   return (
     <View style={{flex:1}}>
         
-    <Link href="/(profileCreation)/healthInformation" style={{padding:25}}>
+    <Link href="/(profileCreation)/dietInfo" style={{padding:25}}>
         <Entypo name="chevron-thin-left" size={24} color="black" />
     </Link>
 
-    <Text style={styles.header}>Goal Setting <Entypo name="flag" size={30} color="black" /></Text>
+    <Text style={styles.header}>Goal Setting</Text>
+    <Text style={styles.subHeader}>Final step ! You can select up to 3 goals and you can change them later.</Text>
+    
+    <Image source={require("assets/goal.jpg")} style={{width:100,height:100,alignSelf:"center", marginBottom:20}}/>
 
+    <View style={styles.listBox}>
 
-    <View style={{ height: '50%', marginTop: 20}}>
-      <Text style={styles.listHeader}>
-        Select up to 3 Goals. You can change it later.
-      </Text>
       <FlashList
         data={allGoals}
         renderItem={({ item }) => (
@@ -142,10 +142,18 @@ export default function goalSetting() {
 const styles = StyleSheet.create({
     header:{
         fontFamily:"Poppins-Bold",
-        fontSize:40, 
+        fontSize:30, 
         textAlign:"center",
-        paddingVertical:10,
     },
+
+    subHeader:{
+      fontFamily:"Poppins-Medium",
+      fontSize:14,
+      color:"#818181", 
+      paddingVertical:10,
+      paddingHorizontal:40,
+    },
+
 
     listHeader:{
       paddingLeft:25,
@@ -154,28 +162,24 @@ const styles = StyleSheet.create({
   },
 
   tabBox:{
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 20,
-    flexDirection:"row",
-    padding:25,
-    alignContent:"center",
-    marginHorizontal: 4,
-    marginVertical:5,
-    flexGrow:1,
-    gap:20
-    
+    borderRadius: 30,
+    paddingVertical:10,
+    paddingHorizontal:20,
+    marginBottom:10,
+    flexDirection:"row"
 },
-
-
 
 tabTextStyle:{
-    fontFamily:"Poppins-SemiBold",
-    fontSize:18, 
-    color:"white",
-
-    height:"100%"
+  fontFamily:"Poppins-Regular",
+  fontSize:14, 
+  color:"white",
+  width:200
+  
 },
+
+
+
+
 
 listContainer: {
   padding:20,
@@ -183,19 +187,28 @@ listContainer: {
 },
 
 buttonBox:{
-  backgroundColor:"#8797DA",
-  borderRadius:5,
-  marginTop:"20%",
+  backgroundColor:"#6B7FD6",
+  borderRadius:30,
+  marginVertical:20,
   width:"90%",
   alignSelf:"center"
-},
+ },
 
-buttonText:{
-  fontFamily:"Poppins-Bold",
-  fontSize:20,color:"white",
-  padding:10,
+ buttonText:{
+  fontFamily:"Poppins-Regular",
+  fontSize:16,
+  color:"white",
+  padding:12,
   textAlign:"center"
-}
+ },
+
+listBox:{
+  height:250,
+  borderWidth:1,
+  marginHorizontal:20,
+  borderRadius:10,
+  marginBottom:10,borderColor:"#D2D2D2"
+ }
 
 
 }

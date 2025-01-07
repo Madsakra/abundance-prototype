@@ -1,9 +1,10 @@
-import { View,StyleSheet, Text, Pressable, Image } from "react-native";
+import { View,StyleSheet, Text, Pressable, Image,TextInput } from "react-native";
 import { useAuth } from "~/context/auth";
-import { TextInput } from "react-native-gesture-handler";
+
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import FunctionTiedButton from "~/components/FunctionTiedButton";
+import InputContainer from "~/components/InputContainer";
 
 
 export default function Home() {
@@ -72,44 +73,63 @@ export default function Home() {
 
       {/* LOGO CONTAINER */}
       <View style={styles.logoContainer}> 
-      <Image source={require('../../assets/icon.png')} style={{width:120,height:120}}/>
+      <Image source={require('../../assets/icon.png')} style={{width:70,height:70}}/>
       </View>
      
-      <Text  style={{fontFamily:'Poppins-SemiBold', fontSize:30, color:'#009797'}}>Hello Again!</Text>
-      <Text  style={{fontFamily:'Poppins-Regular', fontSize:14, marginBottom:20}}>Log in to your account</Text>
+      <Text  style={{fontFamily:'Poppins-ExtraBold', fontSize:24}}>Hello Again!</Text>
+      <Text  style={{fontFamily:'Poppins-SemiBold', fontSize:12, marginBottom:20,color:"#8E8E8E"}}>Log in to your account</Text>
 
+
+
+
+
+      
 
 
 
       <View style={styles.inputSection}>
-             <TextInput
-                placeholder="Enter your email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-                style={[styles.inputBox,{paddingHorizontal:25}]}
-             />
- 
-             <View style={styles.passwordContainer}>
-                <TextInput
-                   placeholder="Enter your Password"
-                   value={password}
-                   onChangeText={text => setPassword(text)}
-                   style={[styles.inputBox, {flex: 1,borderWidth:0}]}
-                   secureTextEntry={!showPassword}
-                />
-                <MaterialCommunityIcons
-                   name={showPassword ? 'eye-off' : 'eye'}
-                   size={24}
-                   color="#aaa"
-                   style={{marginLeft:10}}
-                   onPress={toggleShowPassword}
-                />
-             </View>
+         
+
+
+      <InputContainer 
+      width={"90%"} 
+      inputLabel="Email">
+
+      <TextInput
+         placeholder="Enter your email"
+         value={email}
+         onChangeText={text => setEmail(text)}
+         style={[styles.inputBox]}
+         inputMode="email" />
+
+      </InputContainer>
+
+      
+      <InputContainer 
+      width={"90%"}
+      inputLabel="Password"
+      >
+
+      <TextInput
+         placeholder="Enter your Password"
+         value={password}
+         onChangeText={text => setPassword(text)}
+         style={[styles.inputBox]}
+         secureTextEntry={!showPassword} />
+
+      <MaterialCommunityIcons
+         name={showPassword ? 'eye-off' : 'eye'}
+         size={24}
+         color="#aaa"
+         style={{position:"absolute",bottom:25,right:25}}
+         onPress={toggleShowPassword}
+         />
+
+      </InputContainer>
+
+
           </View>
 
-          <Pressable style={styles.forgetPassword}>
-            <Text style={{color:'#A3A2A2'}}>Forget Password?</Text>
-        </Pressable>
 
   
 
@@ -120,6 +140,9 @@ export default function Home() {
          title="Login"
       />
 
+          <Pressable style={styles.forgetPassword}>
+            <Text style={{color:'#989595',fontFamily:"Poppins-Regular",fontSize:14}}>Forget Password?</Text>
+        </Pressable>
 
       </View>
     </View>
@@ -154,8 +177,8 @@ const styles = StyleSheet.create({
 
   inputSection:{
    gap:10, 
-   width:'100%', 
-   alignItems:'center',
+   alignItems:"center",
+   width:"100%",
    marginTop:10
   },
 
@@ -169,12 +192,10 @@ const styles = StyleSheet.create({
   },
 
   inputBox: {
-     width: "80%",      
-     height: "auto",
-     padding: 15,
-     borderColor: '#A3A2A2',
-     borderWidth: 1,
-     borderRadius: 5,
+     width:"100%",
+     paddingVertical:5,
+      paddingStart:0,
+
   },
 
   passwordContainer: {
@@ -189,22 +210,24 @@ const styles = StyleSheet.create({
   },
 
   forgetPassword:{
-      marginTop:10, 
-      width:'80%',
-      alignItems:"flex-end",   
+      
+      marginTop:20, 
+      width:'100%',
+      alignItems:"center"   
   },
 
 
   buttonBox:{
-   backgroundColor:"#00ACAC",
+   backgroundColor:"#22CBCB",
    width:'80%',
-   borderRadius:5,
+   borderRadius:30,
    marginTop:40
   },
 
   buttonText:{
    fontFamily:"Poppins-Bold",
-   fontSize:20,color:"white",
+   fontSize:20,
+   color:"white",
    padding:10,
    textAlign:"center"
   }

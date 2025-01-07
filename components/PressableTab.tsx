@@ -26,7 +26,7 @@ export default function PressableTab<T>({
 
   const [pressed,setPressed] = useState(false);
 
-  const pressedStyle = [tabBoxStyle,{backgroundColor:'#8797DA'}]
+  const pressedStyle = [tabBoxStyle,{backgroundColor:'#6B7FD6'}]
   const unpressedStyle = [tabBoxStyle,{backgroundColor:'#949494'}]
 
   const handlePress = ()=>{
@@ -47,10 +47,11 @@ export default function PressableTab<T>({
       style={isPressed ? pressedStyle : unpressedStyle}        
       onPress={handlePress}
       >
-        {SvgIcon && <SvgIcon />}
+      
         <Text style={tabTextStyle}>
-          {displayText}
+          {SvgIcon && <SvgIcon />}   {displayText}
         </Text>
+    
       </TouchableOpacity>
 
       

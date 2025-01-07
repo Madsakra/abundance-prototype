@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Platform, StyleSheet, Text, TouchableOpacity,View } from "react-native";
 
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import InputContainer from './InputContainer';
 
 
 type DatePickerProps = {
@@ -39,14 +40,13 @@ export default function DatePicker({birthDate,setBirthDate}:DatePickerProps) {
 
 
   return (
-<View style={styles.container}>
 
-<Text style={styles.label}>Birthdate</Text>
+<InputContainer inputLabel='Date' width={"100%"}>
     <TouchableOpacity onPress={showPicker} style={styles.dateTimePickerTouch}>
-    <AntDesign name="calendar" size={25} color="white" />
-    {birthDate? <Text style={{color:'white'}}>{birthDate.toLocaleDateString()}</Text>
+    <AntDesign name="calendar" size={25} color="black" />
+    {birthDate? <Text style={{color:'black',fontFamily:"Poppins-Regular"}}>{birthDate.toLocaleDateString()}</Text>
     : 
-    <Text style={{fontFamily:'Poppins-Regular',fontSize:15,color:'white'}}>Choose your Birthdate</Text>
+    <Text style={{fontFamily:'Poppins-Regular',fontSize:15}}>Choose your Birthdate</Text>
     }
     </TouchableOpacity>
 
@@ -60,9 +60,7 @@ export default function DatePicker({birthDate,setBirthDate}:DatePickerProps) {
             onChange={onChange}
             />)}
 
-
-
-</View>
+</InputContainer>
   )
 }
 
@@ -84,15 +82,12 @@ const styles = StyleSheet.create({
   },
 
     dateTimePickerTouch:{
-        height:60,
+       
         borderRadius:5,
         width:"100%",
         flexDirection:'row',
         gap:10,
         alignItems:'center',
-        color:'white',
-        backgroundColor: '#8797DA',   
-        paddingLeft:20,
-    
+        marginTop:2
     },
 })

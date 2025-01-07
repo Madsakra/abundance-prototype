@@ -22,10 +22,10 @@
     },
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#00ACAC"
+      "resizeMode": "cover"
     },
     "assetBundlePatterns": [
       "**/*"

@@ -1,20 +1,22 @@
 import { router } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 import CustomTextInput from "~/components/CustomTextInput";
 import FunctionTiedButton from "~/components/FunctionTiedButton";
+import InputContainer from "~/components/InputContainer";
 
 
 export default function bmrInformation() {
   
-    const [height,setHeight] = useState<number|null>(null);
-    const [weight,setWeight] = useState<number|null>(null);
+  const [height, setHeight] = useState<string | null>(null);
+    const [weight,setWeight] = useState<string | null>(null);
 
 
     const nextSection = () => {
       try {
         // Check if height and weight are valid (not null and not 0)
-        if (height && weight && height > 0 && weight > 0) {
+        if (height && weight && Number(height) > 0 && Number(weight) > 0) {
           // Proceed to the next section
           // MAKE CALL TO SQL LITE TO SAVE DATA
           router.replace("/(profileCreation)/healthInformation");
@@ -34,32 +36,41 @@ export default function bmrInformation() {
     return (
     <View style={{flex:1}}>
         <View style={styles.headerContainer}>
-        <Text style={{fontFamily:"Poppins-Bold",fontSize:40,textAlign:"center"}}>Nearly There!</Text>
-        <Text style={{fontFamily:"Poppins-Regular",fontSize:15,textAlign:"center"}}>Fill up the following for BMR (Body Metabolism Rate) Calculation</Text>
+        <Text style={{fontFamily:"Poppins-Bold",fontSize:32,textAlign:"center"}}>BMR Information</Text>
+        <Text style={{fontFamily:"Poppins-Medium",fontSize:16,textAlign:"center",color:"#818181"}}>This is for insulin prediction purposes</Text>
         </View>
 
         {/*Form Container*/}
-        <View style={{flex:1,padding:20,gap:30}}>
+        <View style={{flex:1,padding:20,gap:30,alignItems:"center"}}>
 
-        <CustomTextInput<number> 
-          label="Height"
-          inputValue={height}
-          setInputValue={setHeight}
-          placeHolder="Enter your height here"
-          inputContainerStyle={styles.inputContainer}
-          labelStyle={styles.label}
-          keyboardType="numeric"
-          />
+                    <Image source={require('assets/BMR.jpg')} style={{width:100,height:100}}/>
+                    {/* Height Input */}
+                    <InputContainer 
+                    width={"100%"} 
+                    inputLabel="Height">
+                        <TextInput
+                        placeholder="Enter your Height"
+                        value={height ?? ''} // Use empty string if height is null
+                        onChangeText={text => setHeight(text || null)} // Set to null if text is empty
+                        style={styles.inputBox}
+                        inputMode="numeric"
+                      />
+                  </InputContainer>
 
-        <CustomTextInput<number> 
-          label="Weight"
-          inputValue={weight}
-          setInputValue={setWeight}
-          placeHolder="Enter your weight here"
-          inputContainerStyle={styles.inputContainer}
-          labelStyle={styles.label}
-          keyboardType="numeric"
-          />
+                    {/* Height Input */}
+                    <InputContainer 
+                    width={"100%"} 
+                    inputLabel="Weight">
+                        <TextInput
+                        placeholder="Enter your Weight"
+                        value={weight ?? ''} // Use empty string if height is null
+                        onChangeText={text => setWeight(text || null)} // Set to null if text is empty
+                        style={styles.inputBox}
+                        inputMode="numeric"
+                      />
+                  </InputContainer>
+
+ 
 
         {/*Submit button*/}
 
@@ -87,7 +98,12 @@ const styles = StyleSheet.create({
         padding:30,
         paddingTop:50,
     },
-
+    inputBox: {
+      width:"100%",
+      paddingVertical:5,
+       paddingStart:0,
+      
+   },
 
     label: {
         fontSize: 16,
@@ -108,15 +124,17 @@ const styles = StyleSheet.create({
         fontSize:15,
     },
     buttonBox:{
-        backgroundColor:"#8797DA",
-        borderRadius:5,
-        marginTop:"5%"
-       },
-     
-       buttonText:{
-        fontFamily:"Poppins-Bold",
-        fontSize:20,color:"white",
-        padding:10,
-        textAlign:"center"
-       }
+      backgroundColor:"#6B7FD6",
+      borderRadius:30,
+      marginVertical:10,
+      width:"100%"
+     },
+   
+     buttonText:{
+      fontFamily:"Poppins-Regular",
+      fontSize:16,
+      color:"white",
+      padding:12,
+      textAlign:"center"
+     }
 })

@@ -6,7 +6,7 @@ import { SvgProps } from 'react-native-svg'; // We need to satisfy this prop typ
 
 // Wrapper function for Fontisto icons to match SvgProps
 const CubeSvg: React.FC<SvgProps> = (props) => {
-  return <MaterialCommunityIcons name="cube-send" size={24} color="white" />;
+  return <MaterialCommunityIcons name="cube-send" size={15} color="white" />;
 };
 
 export default CubeSvg;
