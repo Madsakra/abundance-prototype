@@ -5,26 +5,19 @@ import PressableTab from "~/components/PressableTab";
 import { FlashList } from "@shopify/flash-list";
 import { useEffect, useState } from "react";
 import FunctionTiedButton from "~/components/FunctionTiedButton";
-import { toggleItemInList } from "~/util";
+import { toggleItemInList, updateLocalProfileFields } from "~/util";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function healthInformation() {
-
- const allDiets = ["Omnivore","Low Sugar","Low Fat",
-    "Vegetarian","Ketosis","Pescatarian","Gluten-Free",
-    "Dairy-Free","Nut-Free","Soy-Free","Halal","Kosher","Paleo"];
 
 
 
  const healthConditions = ["Type 2 Diabets","High Blood Pressure",
     "Type 1 Diabetes","High Cholesterol","Low Glucose Levels","Low Blood Pressure"];
 
- const [profileDiet,setProfileDiet] = useState<string[]>([]);
 
  const [profileHealthCondi,setProfileHealthCondi] = useState<string[]>([]);
 
- const handleDiet = (diet: string) => {
-  toggleItemInList(diet,setProfileDiet)
-};
 
 
 const handleHealthCondi = (healthCondition: string) => {
@@ -32,15 +25,30 @@ const handleHealthCondi = (healthCondition: string) => {
 };
 
 
+// load pre-existing data , so user don't have to restart 
+const loadProfileData = async () => {
+  const data = await AsyncStorage.getItem('profileData');
+  if (data) {
+      const profile = JSON.parse(data);
+      setProfileHealthCondi([...profile.profileHealthCondi])
+
+  }
+};
 
 
-
-  const nextSection = ()=>{
+  const nextSection = async ()=>{
     // SEND DATA TO SQL LITE FIRST
-
+    await updateLocalProfileFields({
+            profileHealthCondi:profileHealthCondi
+                    })
     // NAVIGATE TO GOAL SETTING PAGE
     router.replace("/(profileCreation)/dietInfo")
   }
+
+  useEffect(()=>{
+    loadProfileData();
+  },[])
+
 
 
   return (
@@ -62,9 +70,9 @@ const handleHealthCondi = (healthCondition: string) => {
         renderItem={({ item }) =>         
         <PressableTab
         editable={true} 
-        isPressed={profileDiet.includes(item)} // Highlight if selected
+        isPressed={profileHealthCondi.includes(item)} // Highlight if selected
         tabBoxStyle={styles.tabBox}
-        handleInfo={handleDiet}
+        handleInfo={handleHealthCondi}
         tabTextStyle={styles.tabTextStyle}
         tabValue={item}/>}
         keyExtractor={(item) => item}

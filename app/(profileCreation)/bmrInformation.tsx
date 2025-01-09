@@ -1,24 +1,43 @@
-import { router } from "expo-router";
-import { useState } from "react";
+import { Entypo } from "@expo/vector-icons";
+import { Link, router } from "expo-router";
+import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import CustomTextInput from "~/components/CustomTextInput";
 import FunctionTiedButton from "~/components/FunctionTiedButton";
 import InputContainer from "~/components/InputContainer";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { updateLocalProfileFields } from "~/util";
+
 
 
 export default function bmrInformation() {
   
   const [height, setHeight] = useState<string | null>(null);
-    const [weight,setWeight] = useState<string | null>(null);
+  const [weight,setWeight] = useState<string | null>(null);
 
+// load pre-existing data , so user don't have to restart 
+const loadProfileData = async () => {
+  const data = await AsyncStorage.getItem('profileData');
+  if (data) {
+      const profile = JSON.parse(data);
+   
+      setHeight(profile.height);
+      setWeight(profile.weight);
+  }
+};
 
-    const nextSection = () => {
+    const nextSection = async () => {
       try {
         // Check if height and weight are valid (not null and not 0)
         if (height && weight && Number(height) > 0 && Number(weight) > 0) {
           // Proceed to the next section
           // MAKE CALL TO SQL LITE TO SAVE DATA
+            await updateLocalProfileFields({
+                  height,
+                  weight
+                })
+
+
           router.replace("/(profileCreation)/healthInformation");
         } else {
           // Alert user if height or weight is invalid
@@ -30,11 +49,19 @@ export default function bmrInformation() {
       }
     };
      
-
+  useEffect(()=>{
+    loadProfileData();
+  },[])
 
 
     return (
     <View style={{flex:1}}>
+
+    <Link href="/(profileCreation)/simpleInformation" style={{padding:25}}>
+            <Entypo name="chevron-thin-left" size={24} color="black" />
+    </Link>
+
+
         <View style={styles.headerContainer}>
         <Text style={{fontFamily:"Poppins-Bold",fontSize:32,textAlign:"center"}}>BMR Information</Text>
         <Text style={{fontFamily:"Poppins-Medium",fontSize:16,textAlign:"center",color:"#818181"}}>This is for insulin prediction purposes</Text>
@@ -49,7 +76,7 @@ export default function bmrInformation() {
                     width={"100%"} 
                     inputLabel="Height">
                         <TextInput
-                        placeholder="Enter your Height"
+                        placeholder="Enter your Height (cm)"
                         value={height ?? ''} // Use empty string if height is null
                         onChangeText={text => setHeight(text || null)} // Set to null if text is empty
                         style={styles.inputBox}
@@ -62,7 +89,7 @@ export default function bmrInformation() {
                     width={"100%"} 
                     inputLabel="Weight">
                         <TextInput
-                        placeholder="Enter your Weight"
+                        placeholder="Enter your Weight (kg)"
                         value={weight ?? ''} // Use empty string if height is null
                         onChangeText={text => setWeight(text || null)} // Set to null if text is empty
                         style={styles.inputBox}

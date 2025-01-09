@@ -11,6 +11,7 @@ import FunctionTiedButton from "~/components/FunctionTiedButton";
 import FireIcon from "~/testComponents/firesvg";
 import CubeSvg from "~/testComponents/cubeSvg";
 import LoadingAnimation from "~/components/LoadingAnimation";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Goal = {
   id: number;
@@ -54,11 +55,21 @@ export default function goalSetting() {
   };
 
 
-  const nextSection = ()=>{
-    
-    
-      try{
 
+// load pre-existing data , so user don't have to restart 
+const loadProfileData = async () => {
+  const data = await AsyncStorage.getItem('profileData');
+  if (data) {
+      return JSON.parse(data);
+  }
+};
+
+  const nextSection = async ()=>{
+
+      const profileData = await loadProfileData()
+      console.log(profileData);
+
+      try{
 
         if (profileGoals.length === 0)
         {
@@ -66,7 +77,13 @@ export default function goalSetting() {
         }
 
         else{
+          // CALL API TO SEND ALL DATA TO STORAGE
           setLoading(true);
+
+
+          // ONCE DONE REMOVE ALL DATA FROM INTERNAL STORAGE AND ROUTE THEM TO PROFILE CREATED
+          await AsyncStorage.removeItem('profileData');
+          console.log('Profile data removed');
           setTimeout(() => {
             setLoading(false);
             router.replace('/(profileCreation)/profileCreated')
